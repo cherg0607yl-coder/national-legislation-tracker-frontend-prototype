@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "Fictional prototype data for the National Legislation Tracker. These bills are NOT real legislation.",
+    "description": "Prototype mock bills for the National Legislation Tracker, including enriched bill-detail fields for AI showcase content.",
     "generatedFor": "frontend-prototype",
     "billCount": 50,
     "disclaimer": "All bill numbers, titles, summaries, sponsors, and URLs are fabricated for design and development purposes only."
@@ -8,20 +8,246 @@
   "bills": [
     {
       "id": "bill-001",
-      "billNumber": "HB 2418",
-      "title": "Algorithmic Accountability and Public Disclosure Act",
-      "summary": "Requires state agencies that deploy automated decision systems to publish impact assessments and maintain a public registry of algorithmic tools. Establishes appeal procedures for individuals adversely affected by automated determinations.",
+      "billNumber": "SB 1234",
+      "title": "Artificial Intelligence Transparency and Accountability Act",
+      "summary": "This bill establishes disclosure and reporting requirements for certain organizations that deploy artificial intelligence systems. It requires covered entities to notify users when they interact with AI, maintain documentation of high-risk systems, conduct impact assessments before deployment, and submit annual transparency reports to the state. The measure also directs the Attorney General to publish guidance and receive complaints related to noncompliance, while creating limited exemptions for research and small businesses.",
       "state": "CA",
-      "status": "In Committee",
+      "status": "Enacted",
       "category": "Artificial Intelligence",
-      "subcategory": "Appropriations",
-      "introducedDate": "2026-07-28",
-      "lastUpdated": "2026-07-28",
+      "subcategory": "Impact Assessment",
+      "introducedDate": "2025-02-12",
+      "lastUpdated": "2025-09-30",
       "sponsors": [
-        "Asm. Marisol Vega",
-        "Asm. Derek Holloway"
+        {
+          "name": "Sen. Jane Smith",
+          "role": "primary",
+          "party": "D",
+          "district": "District 11"
+        },
+        {
+          "name": "Sen. Marcus Cole",
+          "role": "cosponsor",
+          "party": "D",
+          "district": "District 18"
+        },
+        {
+          "name": "Sen. Priya Natarajan",
+          "role": "cosponsor",
+          "party": "D",
+          "district": "District 7"
+        },
+        {
+          "name": "Sen. Helen Orth",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 29"
+        },
+        {
+          "name": "Asm. Theo Ruiz",
+          "role": "cosponsor",
+          "party": "D",
+          "district": "District 44"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/ca/hb-2418"
+      "sourceUrl": "https://example.gov/bills/ca/sb-1234",
+      "officialUrl": "https://example.gov/bills/ca/sb-1234",
+      "normalizedStatus": "Signed into Law",
+      "latestActionDate": "2025-09-30",
+      "session": "2025\u20132026",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [
+        "Senate Judiciary",
+        "Senate Governmental Organization",
+        "Assembly Privacy and Consumer Protection"
+      ],
+      "subcategories": [
+        "Government AI Use",
+        "Transparency",
+        "Accountability",
+        "Impact Assessments",
+        "Consumer Protection"
+      ],
+      "officialSummary": "An act to add Division 3.5 to the Civil Code, relating to artificial intelligence, requiring disclosure, documentation, impact assessment, and reporting by covered deployers of automated decision systems, and authorizing enforcement by the Attorney General.",
+      "textUrl": "https://example.gov/bills/ca/sb-1234/text",
+      "additionalLinks": {
+        "fullText": "https://example.gov/bills/ca/sb-1234/text",
+        "latestVersion": "https://example.gov/bills/ca/sb-1234/enrolled",
+        "fiscalNote": "https://example.gov/bills/ca/sb-1234/fiscal",
+        "amendments": "https://example.gov/bills/ca/sb-1234/amendments",
+        "votingHistory": "https://example.gov/bills/ca/sb-1234/votes"
+      },
+      "actions": [
+        {
+          "date": "2025-02-12",
+          "action": "Introduced in Senate. Read first time.",
+          "chamber": "Senate",
+          "stage": "Introduced",
+          "sourceUrl": "https://example.gov/bills/ca/sb-1234/history#1"
+        },
+        {
+          "date": "2025-02-20",
+          "action": "Referred to Senate Judiciary Committee.",
+          "chamber": "Senate",
+          "committee": "Senate Judiciary",
+          "stage": "Referred to Committee",
+          "sourceUrl": "https://example.gov/bills/ca/sb-1234/history#2"
+        },
+        {
+          "date": "2025-04-08",
+          "action": "Passed Senate Judiciary Committee (9-2).",
+          "chamber": "Senate",
+          "committee": "Senate Judiciary",
+          "stage": "Referred to Committee"
+        },
+        {
+          "date": "2025-05-19",
+          "action": "Passed Senate (28-9).",
+          "chamber": "Senate",
+          "stage": "Passed First Chamber"
+        },
+        {
+          "date": "2025-06-03",
+          "action": "Referred to Assembly Privacy and Consumer Protection.",
+          "chamber": "Assembly",
+          "committee": "Assembly Privacy and Consumer Protection",
+          "stage": "Referred to Committee"
+        },
+        {
+          "date": "2025-07-14",
+          "action": "Passed Assembly (54-18).",
+          "chamber": "Assembly",
+          "stage": "Passed Second Chamber"
+        },
+        {
+          "date": "2025-07-22",
+          "action": "Ordered to engrossing and enrolling.",
+          "chamber": "Legislature",
+          "stage": "Passed Legislature"
+        },
+        {
+          "date": "2025-08-01",
+          "action": "Presented to the Governor.",
+          "chamber": "Executive",
+          "stage": "Awaiting Governor"
+        },
+        {
+          "date": "2025-09-30",
+          "action": "Approved by the Governor. Chaptered by Secretary of State.",
+          "chamber": "Executive",
+          "stage": "Signed into Law",
+          "sourceUrl": "https://example.gov/bills/ca/sb-1234/history#final"
+        }
+      ],
+      "editorial": {
+        "policyGoal": "Improve transparency and accountability in the use of artificial intelligence systems that affect Californians.",
+        "problemAddressed": "Consumers and constituents may not know when they are interacting with an AI system or when automated systems influence important decisions about services, benefits, or opportunities.",
+        "policyMechanism": "Mandatory disclosure, documentation, impact assessments, and annual reporting requirements for covered AI deployers, with Attorney General oversight.",
+        "appliesTo": [
+          "Private companies deploying covered AI systems in California",
+          "Developers of high-risk AI systems offered to California deployers",
+          "State agencies using automated decision tools",
+          "Consumers affected by automated decisions"
+        ],
+        "requirements": [
+          "Notify users when they are interacting with AI",
+          "Maintain documentation about covered AI systems",
+          "Conduct impact or risk assessments before deployment",
+          "Publish annual transparency reports",
+          "Provide information to the responsible state agency",
+          "Establish an appeal or review process for adverse automated decisions"
+        ],
+        "implementation": {
+          "responsibleAgency": "Office of the Attorney General",
+          "oversightBody": "California Department of Technology (guidance partnership)",
+          "effectiveDate": "January 1, 2027",
+          "reportingFrequency": "Annual",
+          "rulemakingAuthority": "Department of Technology, in consultation with the Attorney General",
+          "funding": "General Fund appropriation for first-year implementation support",
+          "implementationDeadline": "July 1, 2027 for agency guidance publication"
+        },
+        "enforcement": [
+          "Attorney General may bring civil actions for violations",
+          "Administrative remedies available for incomplete reporting",
+          "No private right of action under this chapter",
+          "Penalties may include injunctive relief and civil fines for willful noncompliance"
+        ],
+        "exemptions": [
+          "Small businesses below a statutory revenue threshold",
+          "Accredited research institutions conducting non-commercial research",
+          "Certain public safety systems as defined by regulation",
+          "Federally regulated entities to the extent of conflict with federal law"
+        ]
+      },
+      "keyProvisions": [
+        {
+          "title": "AI Disclosure Requirements",
+          "description": "Covered organizations must notify users when they are interacting with certain artificial intelligence systems in customer-facing or consequential decision contexts.",
+          "sectionReference": "Civ. Code \u00a7 3340.10",
+          "sourceUrl": "https://example.gov/bills/ca/sb-1234/text#disclosure"
+        },
+        {
+          "title": "Impact Assessments",
+          "description": "Deployers of high-risk AI systems must evaluate reasonably foreseeable risks before deployment and retain assessment records for audit.",
+          "sectionReference": "Civ. Code \u00a7 3340.20",
+          "sourceUrl": "https://example.gov/bills/ca/sb-1234/text#assessments"
+        },
+        {
+          "title": "Annual Reporting",
+          "description": "Covered entities must submit regular reports describing the use, oversight, and known incidents involving AI systems.",
+          "sectionReference": "Civ. Code \u00a7 3340.30",
+          "sourceUrl": "https://example.gov/bills/ca/sb-1234/text#reporting"
+        },
+        {
+          "title": "Appeal Pathways",
+          "description": "Individuals subject to adverse automated determinations must be offered a meaningful human review process.",
+          "sectionReference": "Civ. Code \u00a7 3340.40"
+        }
+      ],
+      "documents": [
+        {
+          "name": "Introduced version",
+          "date": "2025-02-12",
+          "type": "Bill text",
+          "url": "https://example.gov/bills/ca/sb-1234/versions/introduced"
+        },
+        {
+          "name": "Amended version (Senate)",
+          "date": "2025-04-15",
+          "type": "Amendment",
+          "url": "https://example.gov/bills/ca/sb-1234/versions/amended-senate"
+        },
+        {
+          "name": "Enrolled version",
+          "date": "2025-07-22",
+          "type": "Enrolled text",
+          "url": "https://example.gov/bills/ca/sb-1234/versions/enrolled"
+        },
+        {
+          "name": "Final enacted text",
+          "date": "2025-09-30",
+          "type": "Chaptered",
+          "url": "https://example.gov/bills/ca/sb-1234/versions/chaptered"
+        },
+        {
+          "name": "Fiscal note",
+          "date": "2025-05-01",
+          "type": "Fiscal analysis",
+          "url": "https://example.gov/bills/ca/sb-1234/fiscal"
+        },
+        {
+          "name": "Floor amendments packet",
+          "date": "2025-05-12",
+          "type": "Amendments",
+          "url": "https://example.gov/bills/ca/sb-1234/amendments"
+        }
+      ],
+      "relatedBillIds": [
+        "bill-002",
+        "bill-003",
+        "bill-004",
+        "bill-005"
+      ]
     },
     {
       "id": "bill-002",
@@ -35,10 +261,100 @@
       "introducedDate": "2026-07-27",
       "lastUpdated": "2026-07-28",
       "sponsors": [
-        "Sen. Claudia Reyes",
-        "Sen. Marcus Quinn"
+        {
+          "name": "Sen. Claudia Reyes",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Marcus Quinn",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/tx/sb-914"
+      "sourceUrl": "https://example.gov/bills/tx/sb-914",
+      "officialUrl": "https://example.gov/bills/tx/sb-914",
+      "normalizedStatus": "Passed First Chamber",
+      "latestActionDate": "2026-07-28",
+      "session": "2025\u20132026",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [
+        "Senate Technology Committee"
+      ],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ],
+      "actions": [
+        {
+          "date": "2026-07-27",
+          "action": "Introduced.",
+          "chamber": "Senate",
+          "stage": "Introduced"
+        },
+        {
+          "date": "2026-07-28",
+          "action": "Referred to committee for further consideration.",
+          "chamber": "Senate",
+          "committee": "Senate Technology Committee",
+          "stage": "Referred to Committee"
+        },
+        {
+          "date": "2026-07-28",
+          "action": "Passed chamber of origin.",
+          "chamber": "Senate",
+          "stage": "Passed First Chamber"
+        }
+      ],
+      "editorial": {
+        "policyGoal": "Advance responsible AI policy related to audit.",
+        "problemAddressed": "States lack consistent guardrails for emerging AI uses affecting the public.",
+        "policyMechanism": "Statutory requirements and agency oversight for covered AI uses.",
+        "appliesTo": [
+          "State agencies",
+          "Covered private deployers"
+        ],
+        "requirements": [
+          "Document covered AI uses",
+          "Report designated incidents to the oversight agency"
+        ],
+        "implementation": {
+          "responsibleAgency": "State technology office",
+          "effectiveDate": "January 1, 2027"
+        },
+        "enforcement": [
+          "Administrative enforcement by the designated agency"
+        ],
+        "exemptions": [
+          "Narrow research exemption"
+        ]
+      },
+      "keyProvisions": [
+        {
+          "title": "Core compliance duty",
+          "description": "Establishes minimum transparency, bias-testing, and vendor documentation requirements for artificial intelligence systems purchased by state agencies. Directs the Department of Inf\u2026"
+        }
+      ],
+      "documents": [
+        {
+          "name": "Introduced version",
+          "date": "2026-07-27",
+          "type": "Bill text",
+          "url": "https://example.gov/bills/tx/sb-914/text"
+        }
+      ],
+      "relatedBillIds": [
+        "bill-001",
+        "bill-003",
+        "bill-004",
+        "bill-005"
+      ],
+      "additionalLinks": {
+        "fullText": "https://example.gov/bills/tx/sb-914/text"
+      }
     },
     {
       "id": "bill-003",
@@ -52,9 +368,25 @@
       "introducedDate": "2026-07-25",
       "lastUpdated": "2026-07-26",
       "sponsors": [
-        "Asm. Priya Chandrasekar"
+        {
+          "name": "Asm. Priya Chandrasekar",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/ny/ab-672"
+      "sourceUrl": "https://example.gov/bills/ny/ab-672",
+      "officialUrl": "https://example.gov/bills/ny/ab-672",
+      "normalizedStatus": "Introduced",
+      "latestActionDate": "2026-07-26",
+      "session": "2025\u20132026",
+      "chamber": "Assembly",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-004",
@@ -68,11 +400,37 @@
       "introducedDate": "2026-07-23",
       "lastUpdated": "2026-07-24",
       "sponsors": [
-        "Rep. Hannah Ortiz",
-        "Rep. Calvin Brooks",
-        "Rep. Elena Park"
+        {
+          "name": "Rep. Hannah Ortiz",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Calvin Brooks",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        },
+        {
+          "name": "Rep. Elena Park",
+          "role": "cosponsor",
+          "party": "I",
+          "district": "District 18"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/il/hb-3301"
+      "sourceUrl": "https://example.gov/bills/il/hb-3301",
+      "officialUrl": "https://example.gov/bills/il/hb-3301",
+      "normalizedStatus": "Signed into Law",
+      "latestActionDate": "2026-07-24",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-005",
@@ -86,9 +444,25 @@
       "introducedDate": "2026-07-18",
       "lastUpdated": "2026-07-20",
       "sponsors": [
-        "Sen. Noah Ellison"
+        {
+          "name": "Sen. Noah Ellison",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/wa/sb-455"
+      "sourceUrl": "https://example.gov/bills/wa/sb-455",
+      "officialUrl": "https://example.gov/bills/wa/sb-455",
+      "normalizedStatus": "Referred to Committee",
+      "latestActionDate": "2026-07-20",
+      "session": "2025\u20132026",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [],
+      "subcategories": [
+        "Privacy",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-006",
@@ -102,10 +476,31 @@
       "introducedDate": "2026-07-15",
       "lastUpdated": "2026-07-19",
       "sponsors": [
-        "Rep. Jordan Hale",
-        "Rep. Simone Adler"
+        {
+          "name": "Rep. Jordan Hale",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Simone Adler",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/co/hb-1187"
+      "sourceUrl": "https://example.gov/bills/co/hb-1187",
+      "officialUrl": "https://example.gov/bills/co/hb-1187",
+      "normalizedStatus": "Passed First Chamber",
+      "latestActionDate": "2026-07-19",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Consumer Protection",
+        "Transparency"
+      ]
     },
     {
       "id": "bill-007",
@@ -119,10 +514,30 @@
       "introducedDate": "2026-07-12",
       "lastUpdated": "2026-07-16",
       "sponsors": [
-        "Sen. Lydia Grant",
-        "Sen. Omar Fenton"
+        {
+          "name": "Sen. Lydia Grant",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Omar Fenton",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/ma/sb-2203"
+      "sourceUrl": "https://example.gov/bills/ma/sb-2203",
+      "officialUrl": "https://example.gov/bills/ma/sb-2203",
+      "normalizedStatus": "Vetoed",
+      "latestActionDate": "2026-07-16",
+      "session": "2025\u20132026",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [],
+      "subcategories": [
+        "Education"
+      ]
     },
     {
       "id": "bill-008",
@@ -136,9 +551,25 @@
       "introducedDate": "2026-07-08",
       "lastUpdated": "2026-07-14",
       "sponsors": [
-        "Rep. Travis Maldonado"
+        {
+          "name": "Rep. Travis Maldonado",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/fl/hb-904"
+      "sourceUrl": "https://example.gov/bills/fl/hb-904",
+      "officialUrl": "https://example.gov/bills/fl/hb-904",
+      "normalizedStatus": "Failed",
+      "latestActionDate": "2026-07-14",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Education",
+        "Studies and Task Forces"
+      ]
     },
     {
       "id": "bill-009",
@@ -152,10 +583,30 @@
       "introducedDate": "2026-07-05",
       "lastUpdated": "2026-07-11",
       "sponsors": [
-        "Sen. Keisha Morrow",
-        "Sen. Alan Dietrich"
+        {
+          "name": "Sen. Keisha Morrow",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Alan Dietrich",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/or/sb-781"
+      "sourceUrl": "https://example.gov/bills/or/sb-781",
+      "officialUrl": "https://example.gov/bills/or/sb-781",
+      "normalizedStatus": "Introduced",
+      "latestActionDate": "2026-07-11",
+      "session": "2025\u20132026",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [],
+      "subcategories": [
+        "Employment"
+      ]
     },
     {
       "id": "bill-010",
@@ -169,10 +620,31 @@
       "introducedDate": "2026-07-02",
       "lastUpdated": "2026-07-09",
       "sponsors": [
-        "Rep. Denise Wu",
-        "Rep. Patrick O'Shea"
+        {
+          "name": "Rep. Denise Wu",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Patrick O'Shea",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/mi/hb-5520"
+      "sourceUrl": "https://example.gov/bills/mi/hb-5520",
+      "officialUrl": "https://example.gov/bills/mi/hb-5520",
+      "normalizedStatus": "Signed into Law",
+      "latestActionDate": "2026-07-09",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-011",
@@ -186,9 +658,25 @@
       "introducedDate": "2026-06-30",
       "lastUpdated": "2026-07-07",
       "sponsors": [
-        "Sen. Rebecca Langston"
+        {
+          "name": "Sen. Rebecca Langston",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/va/sb-339"
+      "sourceUrl": "https://example.gov/bills/va/sb-339",
+      "officialUrl": "https://example.gov/bills/va/sb-339",
+      "normalizedStatus": "Referred to Committee",
+      "latestActionDate": "2026-07-07",
+      "session": "2025\u20132026",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-012",
@@ -202,11 +690,38 @@
       "introducedDate": "2026-06-29",
       "lastUpdated": "2026-07-03",
       "sponsors": [
-        "Asm. Victor Nunez",
-        "Asm. Clare Benton",
-        "Asm. Ishaan Patel"
+        {
+          "name": "Asm. Victor Nunez",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Asm. Clare Benton",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        },
+        {
+          "name": "Asm. Ishaan Patel",
+          "role": "cosponsor",
+          "party": "I",
+          "district": "District 18"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/nj/hb-2145"
+      "sourceUrl": "https://example.gov/bills/nj/hb-2145",
+      "officialUrl": "https://example.gov/bills/nj/hb-2145",
+      "normalizedStatus": "Passed First Chamber",
+      "latestActionDate": "2026-07-03",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Government AI Use",
+        "Procurement",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-013",
@@ -220,10 +735,31 @@
       "introducedDate": "2025-04-09",
       "lastUpdated": "2026-07-28",
       "sponsors": [
-        "Sen. Natalie Kromer",
-        "Sen. Wesley Boone"
+        {
+          "name": "Sen. Natalie Kromer",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Wesley Boone",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/pa/sb-1602"
+      "sourceUrl": "https://example.gov/bills/pa/sb-1602",
+      "officialUrl": "https://example.gov/bills/pa/sb-1602",
+      "normalizedStatus": "Referred to Committee",
+      "latestActionDate": "2026-07-28",
+      "session": "2025\u20132026",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [],
+      "subcategories": [
+        "Healthcare",
+        "Privacy"
+      ]
     },
     {
       "id": "bill-014",
@@ -237,9 +773,25 @@
       "introducedDate": "2026-01-28",
       "lastUpdated": "2026-07-27",
       "sponsors": [
-        "Rep. Camille Soto"
+        {
+          "name": "Rep. Camille Soto",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/az/hb-778"
+      "sourceUrl": "https://example.gov/bills/az/hb-778",
+      "officialUrl": "https://example.gov/bills/az/hb-778",
+      "normalizedStatus": "Introduced",
+      "latestActionDate": "2026-07-27",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-015",
@@ -253,10 +805,32 @@
       "introducedDate": "2023-08-15",
       "lastUpdated": "2026-07-26",
       "sponsors": [
-        "Sen. Gregory Phelps",
-        "Sen. Amina Cole"
+        {
+          "name": "Sen. Gregory Phelps",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Amina Cole",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/nc/sb-512"
+      "sourceUrl": "https://example.gov/bills/nc/sb-512",
+      "officialUrl": "https://example.gov/bills/nc/sb-512",
+      "normalizedStatus": "Failed",
+      "latestActionDate": "2026-07-26",
+      "session": "2023\u20132024",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [],
+      "subcategories": [
+        "Impact Assessments",
+        "Accountability",
+        "Transparency"
+      ]
     },
     {
       "id": "bill-016",
@@ -270,9 +844,25 @@
       "introducedDate": "2024-03-20",
       "lastUpdated": "2026-07-25",
       "sponsors": [
-        "Rep. Latoya Simmons"
+        {
+          "name": "Rep. Latoya Simmons",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/ga/hb-4093"
+      "sourceUrl": "https://example.gov/bills/ga/hb-4093",
+      "officialUrl": "https://example.gov/bills/ga/hb-4093",
+      "normalizedStatus": "Vetoed",
+      "latestActionDate": "2026-07-25",
+      "session": "2023\u20132024",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-017",
@@ -286,10 +876,31 @@
       "introducedDate": "2023-02-14",
       "lastUpdated": "2026-07-24",
       "sponsors": [
-        "Sen. Erin Wahlberg",
-        "Sen. Tomas Rivera"
+        {
+          "name": "Sen. Erin Wahlberg",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Tomas Rivera",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/mn/sb-88"
+      "sourceUrl": "https://example.gov/bills/mn/sb-88",
+      "officialUrl": "https://example.gov/bills/mn/sb-88",
+      "normalizedStatus": "Signed into Law",
+      "latestActionDate": "2026-07-24",
+      "session": "2023\u20132024",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Consumer Protection"
+      ]
     },
     {
       "id": "bill-018",
@@ -303,10 +914,31 @@
       "introducedDate": "2024-10-01",
       "lastUpdated": "2026-07-22",
       "sponsors": [
-        "Rep. Megan Crowley",
-        "Rep. Jamal Whitfield"
+        {
+          "name": "Rep. Megan Crowley",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Jamal Whitfield",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/ct/hb-2650"
+      "sourceUrl": "https://example.gov/bills/ct/hb-2650",
+      "officialUrl": "https://example.gov/bills/ct/hb-2650",
+      "normalizedStatus": "Passed First Chamber",
+      "latestActionDate": "2026-07-22",
+      "session": "2023\u20132024",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Accountability",
+        "Government AI Use"
+      ]
     },
     {
       "id": "bill-019",
@@ -320,10 +952,31 @@
       "introducedDate": "2025-02-25",
       "lastUpdated": "2025-11-30",
       "sponsors": [
-        "Sen. Helena Cho",
-        "Sen. Brendan Yates"
+        {
+          "name": "Sen. Helena Cho",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Brendan Yates",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/md/sb-1477"
+      "sourceUrl": "https://example.gov/bills/md/sb-1477",
+      "officialUrl": "https://example.gov/bills/md/sb-1477",
+      "normalizedStatus": "Referred to Committee",
+      "latestActionDate": "2025-11-30",
+      "session": "2025\u20132026",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-020",
@@ -337,10 +990,31 @@
       "introducedDate": "2026-03-05",
       "lastUpdated": "2026-06-12",
       "sponsors": [
-        "Rep. Sofia Delgado",
-        "Rep. Aaron Kim"
+        {
+          "name": "Rep. Sofia Delgado",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Aaron Kim",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/nm/hb-601"
+      "sourceUrl": "https://example.gov/bills/nm/hb-601",
+      "officialUrl": "https://example.gov/bills/nm/hb-601",
+      "normalizedStatus": "Introduced",
+      "latestActionDate": "2026-06-12",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Consumer Protection",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-021",
@@ -354,9 +1028,25 @@
       "introducedDate": "2024-05-07",
       "lastUpdated": "2025-09-25",
       "sponsors": [
-        "Sen. Patricia Glenn"
+        {
+          "name": "Sen. Patricia Glenn",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/oh/sb-2034"
+      "sourceUrl": "https://example.gov/bills/oh/sb-2034",
+      "officialUrl": "https://example.gov/bills/oh/sb-2034",
+      "normalizedStatus": "Passed First Chamber",
+      "latestActionDate": "2025-09-25",
+      "session": "2023\u20132024",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-022",
@@ -370,10 +1060,31 @@
       "introducedDate": "2025-06-18",
       "lastUpdated": "2026-01-09",
       "sponsors": [
-        "Asm. Leo Carrington",
-        "Asm. Naomi Frost"
+        {
+          "name": "Asm. Leo Carrington",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Asm. Naomi Frost",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/nv/hb-991"
+      "sourceUrl": "https://example.gov/bills/nv/hb-991",
+      "officialUrl": "https://example.gov/bills/nv/hb-991",
+      "normalizedStatus": "Referred to Committee",
+      "latestActionDate": "2026-01-09",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-023",
@@ -387,11 +1098,37 @@
       "introducedDate": "2023-09-12",
       "lastUpdated": "2024-10-03",
       "sponsors": [
-        "Sen. Ingrid Halvorsen",
-        "Sen. Curtis Malone",
-        "Sen. Fay Okonkwo"
+        {
+          "name": "Sen. Ingrid Halvorsen",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Curtis Malone",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        },
+        {
+          "name": "Sen. Fay Okonkwo",
+          "role": "cosponsor",
+          "party": "I",
+          "district": "District 18"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/wi/sb-640"
+      "sourceUrl": "https://example.gov/bills/wi/sb-640",
+      "officialUrl": "https://example.gov/bills/wi/sb-640",
+      "normalizedStatus": "Signed into Law",
+      "latestActionDate": "2024-10-03",
+      "session": "2023\u20132024",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-024",
@@ -405,9 +1142,24 @@
       "introducedDate": "2024-07-23",
       "lastUpdated": "2025-04-17",
       "sponsors": [
-        "Rep. Blake Underwood"
+        {
+          "name": "Rep. Blake Underwood",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/tn/hb-3188"
+      "sourceUrl": "https://example.gov/bills/tn/hb-3188",
+      "officialUrl": "https://example.gov/bills/tn/hb-3188",
+      "normalizedStatus": "Vetoed",
+      "latestActionDate": "2025-04-17",
+      "session": "2023\u20132024",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Studies and Task Forces"
+      ]
     },
     {
       "id": "bill-025",
@@ -421,10 +1173,31 @@
       "introducedDate": "2023-01-25",
       "lastUpdated": "2023-06-30",
       "sponsors": [
-        "Sen. Keoni Alvarez",
-        "Sen. Marta Schiff"
+        {
+          "name": "Sen. Keoni Alvarez",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Marta Schiff",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/hi/sb-175"
+      "sourceUrl": "https://example.gov/bills/hi/sb-175",
+      "officialUrl": "https://example.gov/bills/hi/sb-175",
+      "normalizedStatus": "Failed",
+      "latestActionDate": "2023-06-30",
+      "session": "2023\u20132024",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-026",
@@ -438,10 +1211,31 @@
       "introducedDate": "2026-02-17",
       "lastUpdated": "2026-05-28",
       "sponsors": [
-        "Rep. Anika Rahman",
-        "Rep. Cole Bridger"
+        {
+          "name": "Rep. Anika Rahman",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Cole Bridger",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/mo/hb-4402"
+      "sourceUrl": "https://example.gov/bills/mo/hb-4402",
+      "officialUrl": "https://example.gov/bills/mo/hb-4402",
+      "normalizedStatus": "Introduced",
+      "latestActionDate": "2026-05-28",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-027",
@@ -455,9 +1249,25 @@
       "introducedDate": "2025-05-06",
       "lastUpdated": "2025-12-01",
       "sponsors": [
-        "Sen. Dwight Carver"
+        {
+          "name": "Sen. Dwight Carver",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/in/sb-829"
+      "sourceUrl": "https://example.gov/bills/in/sb-829",
+      "officialUrl": "https://example.gov/bills/in/sb-829",
+      "normalizedStatus": "Referred to Committee",
+      "latestActionDate": "2025-12-01",
+      "session": "2025\u20132026",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-028",
@@ -471,10 +1281,31 @@
       "introducedDate": "2024-04-02",
       "lastUpdated": "2025-06-08",
       "sponsors": [
-        "Rep. Haley Quinton",
-        "Rep. Ramon Estevez"
+        {
+          "name": "Rep. Haley Quinton",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Ramon Estevez",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/sc/hb-1566"
+      "sourceUrl": "https://example.gov/bills/sc/hb-1566",
+      "officialUrl": "https://example.gov/bills/sc/hb-1566",
+      "normalizedStatus": "Passed First Chamber",
+      "latestActionDate": "2025-06-08",
+      "session": "2023\u20132024",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-029",
@@ -488,11 +1319,37 @@
       "introducedDate": "2025-08-19",
       "lastUpdated": "2026-03-15",
       "sponsors": [
-        "Sen. Amira Solano",
-        "Sen. Keith Dornan",
-        "Sen. Lisa Yoon"
+        {
+          "name": "Sen. Amira Solano",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Keith Dornan",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        },
+        {
+          "name": "Sen. Lisa Yoon",
+          "role": "cosponsor",
+          "party": "I",
+          "district": "District 18"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/ca/sb-2910"
+      "sourceUrl": "https://example.gov/bills/ca/sb-2910",
+      "officialUrl": "https://example.gov/bills/ca/sb-2910",
+      "normalizedStatus": "Referred to Committee",
+      "latestActionDate": "2026-03-15",
+      "session": "2025\u20132026",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": [],
+      "subcategories": [
+        "Transparency",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-030",
@@ -506,9 +1363,25 @@
       "introducedDate": "2023-06-21",
       "lastUpdated": "2024-02-11",
       "sponsors": [
-        "Rep. Owen Cartwright"
+        {
+          "name": "Rep. Owen Cartwright",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/ut/hb-733"
+      "sourceUrl": "https://example.gov/bills/ut/hb-733",
+      "officialUrl": "https://example.gov/bills/ut/hb-733",
+      "normalizedStatus": "Signed into Law",
+      "latestActionDate": "2024-02-11",
+      "session": "2023\u20132024",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [],
+      "subcategories": [
+        "Privacy",
+        "Accountability"
+      ]
     },
     {
       "id": "bill-031",
@@ -522,10 +1395,62 @@
       "introducedDate": "2023-04-11",
       "lastUpdated": "2024-01-20",
       "sponsors": [
-        "Rep. Danielle Mercer",
-        "Rep. Luis Prado"
+        {
+          "name": "Rep. Danielle Mercer",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Luis Prado",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/tx/hb-1840"
+      "sourceUrl": "https://example.gov/bills/tx/hb-1840",
+      "officialUrl": "https://example.gov/bills/tx/hb-1840",
+      "normalizedStatus": "Signed into Law",
+      "latestActionDate": "2024-01-20",
+      "session": "2023\u20132024",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": [
+        "House Policy Committee"
+      ],
+      "keyProvisions": [
+        {
+          "title": "Primary statutory requirement",
+          "description": "Requires executive agencies to adopt four-year strategic plans aligned with statewide priority outcomes and publish annual progress dashboards. Directs the Governor's Office of Planning to issue guidance and templates."
+        }
+      ],
+      "relatedBillIds": [
+        "bill-032",
+        "bill-033",
+        "bill-034"
+      ],
+      "documents": [
+        {
+          "name": "Introduced version",
+          "date": "2023-04-11",
+          "type": "Bill text",
+          "url": "https://example.gov/bills/tx/hb-1840"
+        }
+      ],
+      "actions": [
+        {
+          "date": "2023-04-11",
+          "action": "Introduced.",
+          "chamber": "House",
+          "stage": "Introduced"
+        },
+        {
+          "date": "2024-01-20",
+          "action": "Status updated to Enacted.",
+          "chamber": "House",
+          "stage": "Signed into Law"
+        }
+      ]
     },
     {
       "id": "bill-032",
@@ -539,9 +1464,21 @@
       "introducedDate": "2025-01-09",
       "lastUpdated": "2025-07-22",
       "sponsors": [
-        "Sen. Miriam Kessler"
+        {
+          "name": "Sen. Miriam Kessler",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/ny/sb-367"
+      "sourceUrl": "https://example.gov/bills/ny/sb-367",
+      "officialUrl": "https://example.gov/bills/ny/sb-367",
+      "normalizedStatus": "Referred to Committee",
+      "latestActionDate": "2025-07-22",
+      "session": "2025\u20132026",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": []
     },
     {
       "id": "bill-033",
@@ -555,10 +1492,27 @@
       "introducedDate": "2024-02-06",
       "lastUpdated": "2025-03-18",
       "sponsors": [
-        "Asm. Theo Rankin",
-        "Asm. Gloria Espinosa"
+        {
+          "name": "Asm. Theo Rankin",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Asm. Gloria Espinosa",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/ca/ab-1205"
+      "sourceUrl": "https://example.gov/bills/ca/ab-1205",
+      "officialUrl": "https://example.gov/bills/ca/ab-1205",
+      "normalizedStatus": "Passed First Chamber",
+      "latestActionDate": "2025-03-18",
+      "session": "2023\u20132024",
+      "chamber": "Assembly",
+      "billType": "House/Assembly Bill",
+      "committees": []
     },
     {
       "id": "bill-034",
@@ -572,10 +1526,27 @@
       "introducedDate": "2026-01-21",
       "lastUpdated": "2026-04-03",
       "sponsors": [
-        "Rep. Nicole Abrams",
-        "Rep. Farid Hassan"
+        {
+          "name": "Rep. Nicole Abrams",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Farid Hassan",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/il/hb-552"
+      "sourceUrl": "https://example.gov/bills/il/hb-552",
+      "officialUrl": "https://example.gov/bills/il/hb-552",
+      "normalizedStatus": "Introduced",
+      "latestActionDate": "2026-04-03",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": []
     },
     {
       "id": "bill-035",
@@ -589,9 +1560,21 @@
       "introducedDate": "2024-08-13",
       "lastUpdated": "2025-05-29",
       "sponsors": [
-        "Sen. Paula Merino"
+        {
+          "name": "Sen. Paula Merino",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/fl/sb-980"
+      "sourceUrl": "https://example.gov/bills/fl/sb-980",
+      "officialUrl": "https://example.gov/bills/fl/sb-980",
+      "normalizedStatus": "Vetoed",
+      "latestActionDate": "2025-05-29",
+      "session": "2023\u20132024",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": []
     },
     {
       "id": "bill-036",
@@ -605,10 +1588,27 @@
       "introducedDate": "2023-10-04",
       "lastUpdated": "2024-04-19",
       "sponsors": [
-        "Rep. Scott Hargrove",
-        "Rep. Yelena Markovic"
+        {
+          "name": "Rep. Scott Hargrove",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Yelena Markovic",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/oh/hb-276"
+      "sourceUrl": "https://example.gov/bills/oh/hb-276",
+      "officialUrl": "https://example.gov/bills/oh/hb-276",
+      "normalizedStatus": "Failed",
+      "latestActionDate": "2024-04-19",
+      "session": "2023\u20132024",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": []
     },
     {
       "id": "bill-037",
@@ -622,10 +1622,27 @@
       "introducedDate": "2023-03-28",
       "lastUpdated": "2024-07-12",
       "sponsors": [
-        "Sen. Harper Lindstrom",
-        "Sen. Denise Cho"
+        {
+          "name": "Sen. Harper Lindstrom",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Denise Cho",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/wa/sb-1411"
+      "sourceUrl": "https://example.gov/bills/wa/sb-1411",
+      "officialUrl": "https://example.gov/bills/wa/sb-1411",
+      "normalizedStatus": "Signed into Law",
+      "latestActionDate": "2024-07-12",
+      "session": "2023\u20132024",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": []
     },
     {
       "id": "bill-038",
@@ -639,9 +1656,21 @@
       "introducedDate": "2025-02-04",
       "lastUpdated": "2025-10-21",
       "sponsors": [
-        "Rep. Ian Whitaker"
+        {
+          "name": "Rep. Ian Whitaker",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/co/hb-3890"
+      "sourceUrl": "https://example.gov/bills/co/hb-3890",
+      "officialUrl": "https://example.gov/bills/co/hb-3890",
+      "normalizedStatus": "Referred to Committee",
+      "latestActionDate": "2025-10-21",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": []
     },
     {
       "id": "bill-039",
@@ -655,10 +1684,27 @@
       "introducedDate": "2024-01-30",
       "lastUpdated": "2025-02-14",
       "sponsors": [
-        "Sen. Rachel Okada",
-        "Sen. Miles Corbett"
+        {
+          "name": "Sen. Rachel Okada",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Miles Corbett",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/ma/sb-624"
+      "sourceUrl": "https://example.gov/bills/ma/sb-624",
+      "officialUrl": "https://example.gov/bills/ma/sb-624",
+      "normalizedStatus": "Passed First Chamber",
+      "latestActionDate": "2025-02-14",
+      "session": "2023\u20132024",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": []
     },
     {
       "id": "bill-040",
@@ -672,11 +1718,33 @@
       "introducedDate": "2026-02-10",
       "lastUpdated": "2026-05-01",
       "sponsors": [
-        "Rep. Jasmine Okonkwo",
-        "Rep. Peter Langley",
-        "Rep. Mei Tran"
+        {
+          "name": "Rep. Jasmine Okonkwo",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Peter Langley",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        },
+        {
+          "name": "Rep. Mei Tran",
+          "role": "cosponsor",
+          "party": "I",
+          "district": "District 18"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/or/hb-915"
+      "sourceUrl": "https://example.gov/bills/or/hb-915",
+      "officialUrl": "https://example.gov/bills/or/hb-915",
+      "normalizedStatus": "Introduced",
+      "latestActionDate": "2026-05-01",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": []
     },
     {
       "id": "bill-041",
@@ -690,9 +1758,21 @@
       "introducedDate": "2023-07-18",
       "lastUpdated": "2024-01-05",
       "sponsors": [
-        "Sen. Geraldine Moss"
+        {
+          "name": "Sen. Geraldine Moss",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/pa/sb-2088"
+      "sourceUrl": "https://example.gov/bills/pa/sb-2088",
+      "officialUrl": "https://example.gov/bills/pa/sb-2088",
+      "normalizedStatus": "Failed",
+      "latestActionDate": "2024-01-05",
+      "session": "2023\u20132024",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": []
     },
     {
       "id": "bill-042",
@@ -706,10 +1786,27 @@
       "introducedDate": "2024-09-26",
       "lastUpdated": "2025-06-03",
       "sponsors": [
-        "Rep. Kendra Vogel",
-        "Rep. Omar Salazar"
+        {
+          "name": "Rep. Kendra Vogel",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Omar Salazar",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/az/hb-1304"
+      "sourceUrl": "https://example.gov/bills/az/hb-1304",
+      "officialUrl": "https://example.gov/bills/az/hb-1304",
+      "normalizedStatus": "Vetoed",
+      "latestActionDate": "2025-06-03",
+      "session": "2023\u20132024",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": []
     },
     {
       "id": "bill-043",
@@ -723,10 +1820,27 @@
       "introducedDate": "2023-05-02",
       "lastUpdated": "2024-09-16",
       "sponsors": [
-        "Sen. Lauren Whitcomb",
-        "Sen. Andre Fontaine"
+        {
+          "name": "Sen. Lauren Whitcomb",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Andre Fontaine",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/mi/sb-471"
+      "sourceUrl": "https://example.gov/bills/mi/sb-471",
+      "officialUrl": "https://example.gov/bills/mi/sb-471",
+      "normalizedStatus": "Signed into Law",
+      "latestActionDate": "2024-09-16",
+      "session": "2023\u20132024",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": []
     },
     {
       "id": "bill-044",
@@ -740,9 +1854,21 @@
       "introducedDate": "2025-03-26",
       "lastUpdated": "2025-11-08",
       "sponsors": [
-        "Del. Samantha Ruiz"
+        {
+          "name": "Del. Samantha Ruiz",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/va/hb-2577"
+      "sourceUrl": "https://example.gov/bills/va/hb-2577",
+      "officialUrl": "https://example.gov/bills/va/hb-2577",
+      "normalizedStatus": "Referred to Committee",
+      "latestActionDate": "2025-11-08",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": []
     },
     {
       "id": "bill-045",
@@ -756,10 +1882,27 @@
       "introducedDate": "2024-06-12",
       "lastUpdated": "2025-10-29",
       "sponsors": [
-        "Sen. Howard Klein",
-        "Sen. Fatima El-Amin"
+        {
+          "name": "Sen. Howard Klein",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Fatima El-Amin",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/nj/sb-1109"
+      "sourceUrl": "https://example.gov/bills/nj/sb-1109",
+      "officialUrl": "https://example.gov/bills/nj/sb-1109",
+      "normalizedStatus": "Passed First Chamber",
+      "latestActionDate": "2025-10-29",
+      "session": "2023\u20132024",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": []
     },
     {
       "id": "bill-046",
@@ -773,10 +1916,27 @@
       "introducedDate": "2026-01-07",
       "lastUpdated": "2026-03-22",
       "sponsors": [
-        "Rep. Tyler McBride",
-        "Rep. Alicia Nguyen"
+        {
+          "name": "Rep. Tyler McBride",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Alicia Nguyen",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/nc/hb-820"
+      "sourceUrl": "https://example.gov/bills/nc/hb-820",
+      "officialUrl": "https://example.gov/bills/nc/hb-820",
+      "normalizedStatus": "Introduced",
+      "latestActionDate": "2026-03-22",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": []
     },
     {
       "id": "bill-047",
@@ -790,9 +1950,21 @@
       "introducedDate": "2023-12-05",
       "lastUpdated": "2024-06-27",
       "sponsors": [
-        "Sen. Monica Fairchild"
+        {
+          "name": "Sen. Monica Fairchild",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/ga/sb-3055"
+      "sourceUrl": "https://example.gov/bills/ga/sb-3055",
+      "officialUrl": "https://example.gov/bills/ga/sb-3055",
+      "normalizedStatus": "Failed",
+      "latestActionDate": "2024-06-27",
+      "session": "2023\u20132024",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": []
     },
     {
       "id": "bill-048",
@@ -806,10 +1978,27 @@
       "introducedDate": "2024-11-14",
       "lastUpdated": "2025-08-07",
       "sponsors": [
-        "Rep. Elise Norberg",
-        "Rep. Jamison Cole"
+        {
+          "name": "Rep. Elise Norberg",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Rep. Jamison Cole",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/mn/hb-1942"
+      "sourceUrl": "https://example.gov/bills/mn/hb-1942",
+      "officialUrl": "https://example.gov/bills/mn/hb-1942",
+      "normalizedStatus": "Vetoed",
+      "latestActionDate": "2025-08-07",
+      "session": "2023\u20132024",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": []
     },
     {
       "id": "bill-049",
@@ -823,11 +2012,33 @@
       "introducedDate": "2023-02-07",
       "lastUpdated": "2023-10-18",
       "sponsors": [
-        "Sen. Bianca Ortiz",
-        "Sen. Craig Ellsworth",
-        "Sen. Nia Bradford"
+        {
+          "name": "Sen. Bianca Ortiz",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Sen. Craig Ellsworth",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        },
+        {
+          "name": "Sen. Nia Bradford",
+          "role": "cosponsor",
+          "party": "I",
+          "district": "District 18"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/ct/sb-58"
+      "sourceUrl": "https://example.gov/bills/ct/sb-58",
+      "officialUrl": "https://example.gov/bills/ct/sb-58",
+      "normalizedStatus": "Signed into Law",
+      "latestActionDate": "2023-10-18",
+      "session": "2023\u20132024",
+      "chamber": "Senate",
+      "billType": "Senate Bill",
+      "committees": []
     },
     {
       "id": "bill-050",
@@ -841,10 +2052,27 @@
       "introducedDate": "2025-04-15",
       "lastUpdated": "2026-02-28",
       "sponsors": [
-        "Del. Quentin Avery",
-        "Del. Rosa Kimura"
+        {
+          "name": "Del. Quentin Avery",
+          "role": "primary",
+          "party": "D",
+          "district": "District 4"
+        },
+        {
+          "name": "Del. Rosa Kimura",
+          "role": "cosponsor",
+          "party": "R",
+          "district": "District 11"
+        }
       ],
-      "sourceUrl": "https://example.gov/bills/md/hb-4211"
+      "sourceUrl": "https://example.gov/bills/md/hb-4211",
+      "officialUrl": "https://example.gov/bills/md/hb-4211",
+      "normalizedStatus": "Referred to Committee",
+      "latestActionDate": "2026-02-28",
+      "session": "2025\u20132026",
+      "chamber": "House",
+      "billType": "House/Assembly Bill",
+      "committees": []
     }
   ]
 }

@@ -251,6 +251,30 @@ p {
   background: var(--color-status-bg-failed);
 }
 
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.55rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-surface-muted);
+  color: var(--color-text-secondary);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.tag--category {
+  background: var(--color-bg-accent-subtle);
+  border-color: var(--color-border-accent);
+  color: var(--color-text-link);
+}
+
+.tag--topic {
+  background: color-mix(in srgb, var(--color-text-brand) 8%, white);
+  border-color: color-mix(in srgb, var(--color-text-brand) 22%, white);
+  color: var(--color-text-brand);
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;

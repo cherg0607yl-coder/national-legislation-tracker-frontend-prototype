@@ -1,4 +1,5 @@
 import type { Bill, BillStatus, PolicyCategory } from "../types/bill";
+import { sponsorNames } from "./bills";
 import { POLICY_CATEGORIES, STATE_NAMES } from "./stats";
 
 export const AI_TOPICS = [
@@ -119,7 +120,9 @@ export function filterBills(bills: Bill[], filters: SearchFilters): Bill[] {
 
     if (
       author &&
-      !bill.sponsors.some((sponsor) => includesIgnoreCase(sponsor, author))
+      !sponsorNames(bill.sponsors).some((sponsor) =>
+        includesIgnoreCase(sponsor, author),
+      )
     ) {
       return false;
     }
@@ -132,7 +135,7 @@ export function filterBills(bills: Bill[], filters: SearchFilters): Bill[] {
         bill.category,
         bill.subcategory,
         bill.state,
-        ...bill.sponsors,
+        ...sponsorNames(bill.sponsors),
       ].join(" ");
       if (!includesIgnoreCase(blob, keyword)) return false;
     }
