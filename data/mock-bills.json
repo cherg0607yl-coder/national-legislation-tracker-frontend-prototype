@@ -1,0 +1,850 @@
+{
+  "_meta": {
+    "description": "Fictional prototype data for the National Legislation Tracker. These bills are NOT real legislation.",
+    "generatedFor": "frontend-prototype",
+    "billCount": 50,
+    "disclaimer": "All bill numbers, titles, summaries, sponsors, and URLs are fabricated for design and development purposes only."
+  },
+  "bills": [
+    {
+      "id": "bill-001",
+      "billNumber": "HB 2418",
+      "title": "Algorithmic Accountability and Public Disclosure Act",
+      "summary": "Requires state agencies that deploy automated decision systems to publish impact assessments and maintain a public registry of algorithmic tools. Establishes appeal procedures for individuals adversely affected by automated determinations.",
+      "state": "CA",
+      "status": "In Committee",
+      "category": "Artificial Intelligence",
+      "subcategory": "Appropriations",
+      "introducedDate": "2026-07-28",
+      "lastUpdated": "2026-07-28",
+      "sponsors": [
+        "Asm. Marisol Vega",
+        "Asm. Derek Holloway"
+      ],
+      "sourceUrl": "https://example.gov/bills/ca/hb-2418"
+    },
+    {
+      "id": "bill-002",
+      "billNumber": "SB 914",
+      "title": "State AI Procurement Standards Act",
+      "summary": "Establishes minimum transparency, bias-testing, and vendor documentation requirements for artificial intelligence systems purchased by state agencies. Directs the Department of Information Technology to issue model contract clauses within one year of enactment.",
+      "state": "TX",
+      "status": "Passed",
+      "category": "Artificial Intelligence",
+      "subcategory": "Audit",
+      "introducedDate": "2026-07-27",
+      "lastUpdated": "2026-07-28",
+      "sponsors": [
+        "Sen. Claudia Reyes",
+        "Sen. Marcus Quinn"
+      ],
+      "sourceUrl": "https://example.gov/bills/tx/sb-914"
+    },
+    {
+      "id": "bill-003",
+      "billNumber": "AB 672",
+      "title": "Facial Recognition Moratorium in Public Spaces",
+      "summary": "Prohibits municipal and state law enforcement from using real-time facial recognition in publicly accessible areas, with limited exceptions for court-authorized investigations. Creates a private right of action for unlawful use.",
+      "state": "NY",
+      "status": "Introduced",
+      "category": "Artificial Intelligence",
+      "subcategory": "Child Pornography",
+      "introducedDate": "2026-07-25",
+      "lastUpdated": "2026-07-26",
+      "sponsors": [
+        "Asm. Priya Chandrasekar"
+      ],
+      "sourceUrl": "https://example.gov/bills/ny/ab-672"
+    },
+    {
+      "id": "bill-004",
+      "billNumber": "HB 3301",
+      "title": "Automated Decision Systems Fairness Act",
+      "summary": "Mandates pre-deployment fairness audits for automated systems used in public benefits eligibility, hiring for state employment, and housing assistance determinations. Requires agencies to offer human review upon request.",
+      "state": "IL",
+      "status": "Enacted",
+      "category": "Artificial Intelligence",
+      "subcategory": "Criminal Use",
+      "introducedDate": "2026-07-23",
+      "lastUpdated": "2026-07-24",
+      "sponsors": [
+        "Rep. Hannah Ortiz",
+        "Rep. Calvin Brooks",
+        "Rep. Elena Park"
+      ],
+      "sourceUrl": "https://example.gov/bills/il/hb-3301"
+    },
+    {
+      "id": "bill-005",
+      "billNumber": "SB 455",
+      "title": "Generative AI Use in State Communications Act",
+      "summary": "Requires disclosure when generative artificial intelligence is used to produce official state publications, press materials, or public-facing digital content. Directs agencies to retain human editorial oversight for all generative outputs.",
+      "state": "WA",
+      "status": "In Committee",
+      "category": "Artificial Intelligence",
+      "subcategory": "Cybersecurity",
+      "introducedDate": "2026-07-18",
+      "lastUpdated": "2026-07-20",
+      "sponsors": [
+        "Sen. Noah Ellison"
+      ],
+      "sourceUrl": "https://example.gov/bills/wa/sb-455"
+    },
+    {
+      "id": "bill-006",
+      "billNumber": "HB 1187",
+      "title": "Data Privacy and Artificial Intelligence Safeguards Act",
+      "summary": "Limits the use of personally identifiable data in training and operating government AI systems. Requires data minimization plans and breach notification timelines specific to AI-processed datasets.",
+      "state": "CO",
+      "status": "Passed",
+      "category": "Artificial Intelligence",
+      "subcategory": "Deepfake",
+      "introducedDate": "2026-07-15",
+      "lastUpdated": "2026-07-19",
+      "sponsors": [
+        "Rep. Jordan Hale",
+        "Rep. Simone Adler"
+      ],
+      "sourceUrl": "https://example.gov/bills/co/hb-1187"
+    },
+    {
+      "id": "bill-007",
+      "billNumber": "SB 2203",
+      "title": "Public Sector Algorithm Inventory Act",
+      "summary": "Directs each executive agency to inventory algorithms and machine learning models used in service delivery and report annually to the legislature. Creates a centralized state algorithm catalog accessible to the public.",
+      "state": "MA",
+      "status": "Vetoed",
+      "category": "Artificial Intelligence",
+      "subcategory": "Education Use",
+      "introducedDate": "2026-07-12",
+      "lastUpdated": "2026-07-16",
+      "sponsors": [
+        "Sen. Lydia Grant",
+        "Sen. Omar Fenton"
+      ],
+      "sourceUrl": "https://example.gov/bills/ma/sb-2203"
+    },
+    {
+      "id": "bill-008",
+      "billNumber": "HB 904",
+      "title": "AI Vendor Risk Assessment Requirements",
+      "summary": "Requires state procurement officers to complete standardized AI risk assessments before awarding contracts for machine learning or generative AI products. Prohibits sole-source awards for high-risk AI systems without legislative notification.",
+      "state": "FL",
+      "status": "Failed",
+      "category": "Artificial Intelligence",
+      "subcategory": "Education/Training",
+      "introducedDate": "2026-07-08",
+      "lastUpdated": "2026-07-14",
+      "sponsors": [
+        "Rep. Travis Maldonado"
+      ],
+      "sourceUrl": "https://example.gov/bills/fl/hb-904"
+    },
+    {
+      "id": "bill-009",
+      "billNumber": "SB 781",
+      "title": "Biometric Surveillance Oversight Act",
+      "summary": "Creates a statewide biometric surveillance oversight board and requires warrants for law enforcement use of facial recognition matching against civilian databases. Establishes annual reporting on query volume and accuracy rates.",
+      "state": "OR",
+      "status": "Introduced",
+      "category": "Artificial Intelligence",
+      "subcategory": "Effect on Labor/Employment",
+      "introducedDate": "2026-07-05",
+      "lastUpdated": "2026-07-11",
+      "sponsors": [
+        "Sen. Keisha Morrow",
+        "Sen. Alan Dietrich"
+      ],
+      "sourceUrl": "https://example.gov/bills/or/sb-781"
+    },
+    {
+      "id": "bill-010",
+      "billNumber": "HB 5520",
+      "title": "Automated Eligibility Determinations Review Act",
+      "summary": "Requires human review of adverse automated eligibility decisions for Medicaid, SNAP, and unemployment insurance within ten business days. Mandates plain-language notices explaining the role of automated systems.",
+      "state": "MI",
+      "status": "Enacted",
+      "category": "Artificial Intelligence",
+      "subcategory": "Elections",
+      "introducedDate": "2026-07-02",
+      "lastUpdated": "2026-07-09",
+      "sponsors": [
+        "Rep. Denise Wu",
+        "Rep. Patrick O'Shea"
+      ],
+      "sourceUrl": "https://example.gov/bills/mi/hb-5520"
+    },
+    {
+      "id": "bill-011",
+      "billNumber": "SB 339",
+      "title": "Generative AI Workforce Training Pilot Program",
+      "summary": "Authorizes a three-year pilot program to train state employees on responsible use of generative AI tools for drafting, summarization, and constituent correspondence. Requires evaluation of productivity and error rates before statewide expansion.",
+      "state": "VA",
+      "status": "In Committee",
+      "category": "Artificial Intelligence",
+      "subcategory": "Energy",
+      "introducedDate": "2026-06-30",
+      "lastUpdated": "2026-07-07",
+      "sponsors": [
+        "Sen. Rebecca Langston"
+      ],
+      "sourceUrl": "https://example.gov/bills/va/sb-339"
+    },
+    {
+      "id": "bill-012",
+      "billNumber": "HB 2145",
+      "title": "AI Training Data Provenance Disclosure Act",
+      "summary": "Requires vendors supplying AI systems to state agencies to disclose categories of training data, known data provenance gaps, and any use of copyrighted or personally identifiable material. Applies to contracts executed after January 1, 2027.",
+      "state": "NJ",
+      "status": "Passed",
+      "category": "Artificial Intelligence",
+      "subcategory": "Government Use",
+      "introducedDate": "2026-06-29",
+      "lastUpdated": "2026-07-03",
+      "sponsors": [
+        "Asm. Victor Nunez",
+        "Asm. Clare Benton",
+        "Asm. Ishaan Patel"
+      ],
+      "sourceUrl": "https://example.gov/bills/nj/hb-2145"
+    },
+    {
+      "id": "bill-013",
+      "billNumber": "SB 1602",
+      "title": "Municipal Algorithmic Impact Assessment Mandate",
+      "summary": "Requires cities with populations over 100,000 to complete algorithmic impact assessments before deploying automated systems that affect housing, policing, or social services. Provides matching grants for compliance assistance.",
+      "state": "PA",
+      "status": "In Committee",
+      "category": "Artificial Intelligence",
+      "subcategory": "Health Use",
+      "introducedDate": "2025-04-09",
+      "lastUpdated": "2026-07-28",
+      "sponsors": [
+        "Sen. Natalie Kromer",
+        "Sen. Wesley Boone"
+      ],
+      "sourceUrl": "https://example.gov/bills/pa/sb-1602"
+    },
+    {
+      "id": "bill-014",
+      "billNumber": "HB 778",
+      "title": "State Cloud AI Services Contracting Act",
+      "summary": "Establishes preferred contracting frameworks for cloud-hosted AI services, including audit rights, data residency requirements, and termination-for-bias provisions. Directs the Chief Information Officer to publish a model RFP within 180 days.",
+      "state": "AZ",
+      "status": "Introduced",
+      "category": "Artificial Intelligence",
+      "subcategory": "Housing",
+      "introducedDate": "2026-01-28",
+      "lastUpdated": "2026-07-27",
+      "sponsors": [
+        "Rep. Camille Soto"
+      ],
+      "sourceUrl": "https://example.gov/bills/az/hb-778"
+    },
+    {
+      "id": "bill-015",
+      "billNumber": "SB 512",
+      "title": "School Campus Facial Recognition Restrictions",
+      "summary": "Bars public K-12 schools and community colleges from installing facial recognition systems without parental notice and school board approval. Exempts one-time event security under narrowly defined emergency conditions.",
+      "state": "NC",
+      "status": "Failed",
+      "category": "Artificial Intelligence",
+      "subcategory": "Impact Assessment",
+      "introducedDate": "2023-08-15",
+      "lastUpdated": "2026-07-26",
+      "sponsors": [
+        "Sen. Gregory Phelps",
+        "Sen. Amina Cole"
+      ],
+      "sourceUrl": "https://example.gov/bills/nc/sb-512"
+    },
+    {
+      "id": "bill-016",
+      "billNumber": "HB 4093",
+      "title": "Automated Sentencing Advisory Tool Ban",
+      "summary": "Prohibits courts from relying on proprietary automated risk assessment tools for sentencing recommendations unless the methodology and training data are disclosed to defense counsel. Creates a judicial technology advisory panel.",
+      "state": "GA",
+      "status": "Vetoed",
+      "category": "Artificial Intelligence",
+      "subcategory": "Judicial Use",
+      "introducedDate": "2024-03-20",
+      "lastUpdated": "2026-07-25",
+      "sponsors": [
+        "Rep. Latoya Simmons"
+      ],
+      "sourceUrl": "https://example.gov/bills/ga/hb-4093"
+    },
+    {
+      "id": "bill-017",
+      "billNumber": "SB 88",
+      "title": "Generative AI Legislative Drafting Guardrails Act",
+      "summary": "Authorizes limited use of generative AI to assist legislative staff with bill drafting and research summaries, subject to mandatory human authorship attestation. Prohibits using generative AI to fabricate citations or statutory cross-references.",
+      "state": "MN",
+      "status": "Enacted",
+      "category": "Artificial Intelligence",
+      "subcategory": "Notification",
+      "introducedDate": "2023-02-14",
+      "lastUpdated": "2026-07-24",
+      "sponsors": [
+        "Sen. Erin Wahlberg",
+        "Sen. Tomas Rivera"
+      ],
+      "sourceUrl": "https://example.gov/bills/mn/sb-88"
+    },
+    {
+      "id": "bill-018",
+      "billNumber": "HB 2650",
+      "title": "Consumer AI Profiling Opt-Out Act",
+      "summary": "Grants residents the right to opt out of automated profiling by businesses that sell or share AI-derived consumer scores with state agencies. Requires agencies to honor opt-out requests within 30 days.",
+      "state": "CT",
+      "status": "Passed",
+      "category": "Artificial Intelligence",
+      "subcategory": "Oversight/Governance",
+      "introducedDate": "2024-10-01",
+      "lastUpdated": "2026-07-22",
+      "sponsors": [
+        "Rep. Megan Crowley",
+        "Rep. Jamal Whitfield"
+      ],
+      "sourceUrl": "https://example.gov/bills/ct/hb-2650"
+    },
+    {
+      "id": "bill-019",
+      "billNumber": "SB 1477",
+      "title": "Independent AI Audit Authority Act",
+      "summary": "Creates an Independent AI Audit Authority empowered to compel production of model documentation from agencies and vendors. Authorizes public summary reports while protecting trade secrets under a sealed-review process.",
+      "state": "MD",
+      "status": "In Committee",
+      "category": "Artificial Intelligence",
+      "subcategory": "Personhood",
+      "introducedDate": "2025-02-25",
+      "lastUpdated": "2025-11-30",
+      "sponsors": [
+        "Sen. Helena Cho",
+        "Sen. Brendan Yates"
+      ],
+      "sourceUrl": "https://example.gov/bills/md/sb-1477"
+    },
+    {
+      "id": "bill-020",
+      "billNumber": "HB 601",
+      "title": "AI Systems Accessibility and Language Equity Act",
+      "summary": "Requires AI-enabled public service interfaces to meet accessibility standards and provide equivalent service quality in the state's most commonly spoken non-English languages. Directs agencies to test disparate error rates across language groups.",
+      "state": "NM",
+      "status": "Introduced",
+      "category": "Artificial Intelligence",
+      "subcategory": "Private Right of Action",
+      "introducedDate": "2026-03-05",
+      "lastUpdated": "2026-06-12",
+      "sponsors": [
+        "Rep. Sofia Delgado",
+        "Rep. Aaron Kim"
+      ],
+      "sourceUrl": "https://example.gov/bills/nm/hb-601"
+    },
+    {
+      "id": "bill-021",
+      "billNumber": "SB 2034",
+      "title": "Statewide AI Procurement Preference Program",
+      "summary": "Creates a preference for AI vendors that publish open evaluation benchmarks and commit to independent bias testing. Caps preference points and requires annual legislative reporting on award outcomes.",
+      "state": "OH",
+      "status": "Passed",
+      "category": "Artificial Intelligence",
+      "subcategory": "Private Sector Use",
+      "introducedDate": "2024-05-07",
+      "lastUpdated": "2025-09-25",
+      "sponsors": [
+        "Sen. Patricia Glenn"
+      ],
+      "sourceUrl": "https://example.gov/bills/oh/sb-2034"
+    },
+    {
+      "id": "bill-022",
+      "billNumber": "HB 991",
+      "title": "Transit Hub Facial Matching Prohibition",
+      "summary": "Prohibits transit authorities from deploying facial matching technology for passenger screening or fare enforcement. Allows limited use for investigating violent felonies with judicial authorization.",
+      "state": "NV",
+      "status": "In Committee",
+      "category": "Artificial Intelligence",
+      "subcategory": "Provenance",
+      "introducedDate": "2025-06-18",
+      "lastUpdated": "2026-01-09",
+      "sponsors": [
+        "Asm. Leo Carrington",
+        "Asm. Naomi Frost"
+      ],
+      "sourceUrl": "https://example.gov/bills/nv/hb-991"
+    },
+    {
+      "id": "bill-023",
+      "billNumber": "SB 640",
+      "title": "Agency Generative AI Content Labeling Act",
+      "summary": "Requires clear labeling of images, audio, and video generated or substantially altered by generative AI when published by state agencies. Establishes civil penalties for knowing failure to disclose synthetic media.",
+      "state": "WI",
+      "status": "Enacted",
+      "category": "Artificial Intelligence",
+      "subcategory": "Responsible Use",
+      "introducedDate": "2023-09-12",
+      "lastUpdated": "2024-10-03",
+      "sponsors": [
+        "Sen. Ingrid Halvorsen",
+        "Sen. Curtis Malone",
+        "Sen. Fay Okonkwo"
+      ],
+      "sourceUrl": "https://example.gov/bills/wi/sb-640"
+    },
+    {
+      "id": "bill-024",
+      "billNumber": "HB 3188",
+      "title": "Sensitive Data Ban for Public AI Models",
+      "summary": "Prohibits state agencies from uploading health, tax, or juvenile justice records into third-party generative AI platforms. Requires agency-approved enterprise tools with contractual data-retention limits.",
+      "state": "TN",
+      "status": "Vetoed",
+      "category": "Artificial Intelligence",
+      "subcategory": "Studies",
+      "introducedDate": "2024-07-23",
+      "lastUpdated": "2025-04-17",
+      "sponsors": [
+        "Rep. Blake Underwood"
+      ],
+      "sourceUrl": "https://example.gov/bills/tn/hb-3188"
+    },
+    {
+      "id": "bill-025",
+      "billNumber": "SB 175",
+      "title": "High-Risk Automated System Registry Act",
+      "summary": "Defines high-risk automated decision systems and requires registration with the state Attorney General before deployment. Authorizes the Attorney General to seek injunctive relief for unregistered high-risk systems.",
+      "state": "HI",
+      "status": "Failed",
+      "category": "Artificial Intelligence",
+      "subcategory": "Taxes",
+      "introducedDate": "2023-01-25",
+      "lastUpdated": "2023-06-30",
+      "sponsors": [
+        "Sen. Keoni Alvarez",
+        "Sen. Marta Schiff"
+      ],
+      "sourceUrl": "https://example.gov/bills/hi/sb-175"
+    },
+    {
+      "id": "bill-026",
+      "billNumber": "HB 4402",
+      "title": "Public Benefits Chatbot Standards Act",
+      "summary": "Sets accuracy, escalation, and nondiscrimination standards for generative AI chatbots used to assist residents with public benefits applications. Requires quarterly accuracy audits and public posting of error rates.",
+      "state": "MO",
+      "status": "Introduced",
+      "category": "Artificial Intelligence",
+      "subcategory": "Appropriations",
+      "introducedDate": "2026-02-17",
+      "lastUpdated": "2026-05-28",
+      "sponsors": [
+        "Rep. Anika Rahman",
+        "Rep. Cole Bridger"
+      ],
+      "sourceUrl": "https://example.gov/bills/mo/hb-4402"
+    },
+    {
+      "id": "bill-027",
+      "billNumber": "SB 829",
+      "title": "Automated Hiring Tool Disclosure for State Contractors",
+      "summary": "Requires companies contracting with the state to disclose use of automated hiring tools and provide adverse-action notices when such tools contribute to rejection of applicants for contract-related positions.",
+      "state": "IN",
+      "status": "In Committee",
+      "category": "Artificial Intelligence",
+      "subcategory": "Audit",
+      "introducedDate": "2025-05-06",
+      "lastUpdated": "2025-12-01",
+      "sponsors": [
+        "Sen. Dwight Carver"
+      ],
+      "sourceUrl": "https://example.gov/bills/in/sb-829"
+    },
+    {
+      "id": "bill-028",
+      "billNumber": "HB 1566",
+      "title": "AI Model Lifecycle Documentation Act",
+      "summary": "Requires agencies to maintain lifecycle documentation for AI models, including intended use, update history, known failure modes, and retirement criteria. Makes documentation available to legislative oversight committees upon request.",
+      "state": "SC",
+      "status": "Passed",
+      "category": "Artificial Intelligence",
+      "subcategory": "Child Pornography",
+      "introducedDate": "2024-04-02",
+      "lastUpdated": "2025-06-08",
+      "sponsors": [
+        "Rep. Haley Quinton",
+        "Rep. Ramon Estevez"
+      ],
+      "sourceUrl": "https://example.gov/bills/sc/hb-1566"
+    },
+    {
+      "id": "bill-029",
+      "billNumber": "SB 2910",
+      "title": "Law Enforcement AI Tool Procurement Moratorium",
+      "summary": "Imposes a two-year moratorium on new procurement of predictive policing and facial recognition tools by law enforcement pending completion of a statewide civil liberties review. Allows renewal of existing contracts under current terms only.",
+      "state": "CA",
+      "status": "In Committee",
+      "category": "Artificial Intelligence",
+      "subcategory": "Criminal Use",
+      "introducedDate": "2025-08-19",
+      "lastUpdated": "2026-03-15",
+      "sponsors": [
+        "Sen. Amira Solano",
+        "Sen. Keith Dornan",
+        "Sen. Lisa Yoon"
+      ],
+      "sourceUrl": "https://example.gov/bills/ca/sb-2910"
+    },
+    {
+      "id": "bill-030",
+      "billNumber": "HB 733",
+      "title": "Cross-Border Data Transfer Limits for State AI",
+      "summary": "Restricts transfer of state-held personal data to foreign jurisdictions for AI training or inference without a documented risk assessment and Attorney General approval. Applies to vendors processing data on behalf of agencies.",
+      "state": "UT",
+      "status": "Enacted",
+      "category": "Artificial Intelligence",
+      "subcategory": "Cybersecurity",
+      "introducedDate": "2023-06-21",
+      "lastUpdated": "2024-02-11",
+      "sponsors": [
+        "Rep. Owen Cartwright"
+      ],
+      "sourceUrl": "https://example.gov/bills/ut/hb-733"
+    },
+    {
+      "id": "bill-031",
+      "billNumber": "HB 1840",
+      "title": "Statewide Strategic Performance Planning Act",
+      "summary": "Requires executive agencies to adopt four-year strategic plans aligned with statewide priority outcomes and publish annual progress dashboards. Directs the Governor's Office of Planning to issue guidance and templates.",
+      "state": "TX",
+      "status": "Enacted",
+      "category": "Strategic Planning",
+      "subcategory": "Agency Strategic Plans",
+      "introducedDate": "2023-04-11",
+      "lastUpdated": "2024-01-20",
+      "sponsors": [
+        "Rep. Danielle Mercer",
+        "Rep. Luis Prado"
+      ],
+      "sourceUrl": "https://example.gov/bills/tx/hb-1840"
+    },
+    {
+      "id": "bill-032",
+      "billNumber": "SB 367",
+      "title": "Interagency Coordination and Priority Setting Act",
+      "summary": "Creates a cabinet-level Priority Coordination Council to align cross-agency initiatives and reduce duplicative planning mandates. Requires biennial reports identifying overlapping programs and consolidation opportunities.",
+      "state": "NY",
+      "status": "In Committee",
+      "category": "Strategic Planning",
+      "subcategory": "Cross-Agency Coordination",
+      "introducedDate": "2025-01-09",
+      "lastUpdated": "2025-07-22",
+      "sponsors": [
+        "Sen. Miriam Kessler"
+      ],
+      "sourceUrl": "https://example.gov/bills/ny/sb-367"
+    },
+    {
+      "id": "bill-033",
+      "billNumber": "AB 1205",
+      "title": "Long-Range Capital Investment Planning Act",
+      "summary": "Mandates a ten-year statewide capital investment plan integrating transportation, water, and broadband priorities. Requires public hearings in each region before plan adoption.",
+      "state": "CA",
+      "status": "Passed",
+      "category": "Strategic Planning",
+      "subcategory": "Capital Planning",
+      "introducedDate": "2024-02-06",
+      "lastUpdated": "2025-03-18",
+      "sponsors": [
+        "Asm. Theo Rankin",
+        "Asm. Gloria Espinosa"
+      ],
+      "sourceUrl": "https://example.gov/bills/ca/ab-1205"
+    },
+    {
+      "id": "bill-034",
+      "billNumber": "HB 552",
+      "title": "Community-Informed Strategic Planning Requirements",
+      "summary": "Requires agencies developing strategic plans to conduct structured community engagement and document how public input influenced final priorities. Establishes minimum accessibility standards for planning materials.",
+      "state": "IL",
+      "status": "Introduced",
+      "category": "Strategic Planning",
+      "subcategory": "Public Engagement in Planning",
+      "introducedDate": "2026-01-21",
+      "lastUpdated": "2026-04-03",
+      "sponsors": [
+        "Rep. Nicole Abrams",
+        "Rep. Farid Hassan"
+      ],
+      "sourceUrl": "https://example.gov/bills/il/hb-552"
+    },
+    {
+      "id": "bill-035",
+      "billNumber": "SB 980",
+      "title": "Climate Resilience Strategic Framework Act",
+      "summary": "Directs the state to adopt a climate resilience strategic framework with measurable adaptation goals for coastal, agricultural, and urban areas. Requires agency plans to incorporate framework targets by 2028.",
+      "state": "FL",
+      "status": "Vetoed",
+      "category": "Strategic Planning",
+      "subcategory": "Resilience Planning",
+      "introducedDate": "2024-08-13",
+      "lastUpdated": "2025-05-29",
+      "sponsors": [
+        "Sen. Paula Merino"
+      ],
+      "sourceUrl": "https://example.gov/bills/fl/sb-980"
+    },
+    {
+      "id": "bill-036",
+      "billNumber": "HB 276",
+      "title": "Workforce Development Strategic Alignment Act",
+      "summary": "Aligns workforce board strategic plans with projected labor-market demand and regional economic development strategies. Requires annual updates using common labor-market indicators.",
+      "state": "OH",
+      "status": "Failed",
+      "category": "Strategic Planning",
+      "subcategory": "Workforce Planning",
+      "introducedDate": "2023-10-04",
+      "lastUpdated": "2024-04-19",
+      "sponsors": [
+        "Rep. Scott Hargrove",
+        "Rep. Yelena Markovic"
+      ],
+      "sourceUrl": "https://example.gov/bills/oh/hb-276"
+    },
+    {
+      "id": "bill-037",
+      "billNumber": "SB 1411",
+      "title": "Statewide Performance Measures Standardization Act",
+      "summary": "Establishes a common set of core performance measures for major public services and requires agencies to report against them in budget documents. Creates a technical working group to refine measure definitions.",
+      "state": "WA",
+      "status": "Enacted",
+      "category": "Performance Measures",
+      "subcategory": "Core Performance Indicators",
+      "introducedDate": "2023-03-28",
+      "lastUpdated": "2024-07-12",
+      "sponsors": [
+        "Sen. Harper Lindstrom",
+        "Sen. Denise Cho"
+      ],
+      "sourceUrl": "https://example.gov/bills/wa/sb-1411"
+    },
+    {
+      "id": "bill-038",
+      "billNumber": "HB 3890",
+      "title": "Results-Based Budgeting Performance Act",
+      "summary": "Ties a portion of discretionary agency funding to demonstrated progress on legislatively approved performance targets. Requires mid-cycle corrective action plans when targets are missed by more than 15 percent.",
+      "state": "CO",
+      "status": "In Committee",
+      "category": "Performance Measures",
+      "subcategory": "Results-Based Budgeting",
+      "introducedDate": "2025-02-04",
+      "lastUpdated": "2025-10-21",
+      "sponsors": [
+        "Rep. Ian Whitaker"
+      ],
+      "sourceUrl": "https://example.gov/bills/co/hb-3890"
+    },
+    {
+      "id": "bill-039",
+      "billNumber": "SB 624",
+      "title": "Public Dashboard Transparency for Agency Performance",
+      "summary": "Requires each cabinet agency to maintain a publicly accessible performance dashboard updated at least quarterly. Mandates machine-readable data exports for independent analysis.",
+      "state": "MA",
+      "status": "Passed",
+      "category": "Performance Measures",
+      "subcategory": "Public Performance Reporting",
+      "introducedDate": "2024-01-30",
+      "lastUpdated": "2025-02-14",
+      "sponsors": [
+        "Sen. Rachel Okada",
+        "Sen. Miles Corbett"
+      ],
+      "sourceUrl": "https://example.gov/bills/ma/sb-624"
+    },
+    {
+      "id": "bill-040",
+      "billNumber": "HB 915",
+      "title": "Equity-Centered Performance Metrics Act",
+      "summary": "Requires agencies to disaggregate key performance measures by race, ethnicity, geography, and disability status where statistically feasible. Directs the state demographer to publish methodological guidance.",
+      "state": "OR",
+      "status": "Introduced",
+      "category": "Performance Measures",
+      "subcategory": "Equity Metrics",
+      "introducedDate": "2026-02-10",
+      "lastUpdated": "2026-05-01",
+      "sponsors": [
+        "Rep. Jasmine Okonkwo",
+        "Rep. Peter Langley",
+        "Rep. Mei Tran"
+      ],
+      "sourceUrl": "https://example.gov/bills/or/hb-915"
+    },
+    {
+      "id": "bill-041",
+      "billNumber": "SB 2088",
+      "title": "Local Government Performance Benchmarking Act",
+      "summary": "Creates a voluntary statewide benchmarking program for municipal service performance and authorizes technical assistance grants. Prohibits use of benchmarking data alone as grounds for funding reductions.",
+      "state": "PA",
+      "status": "Failed",
+      "category": "Performance Measures",
+      "subcategory": "Local Benchmarking",
+      "introducedDate": "2023-07-18",
+      "lastUpdated": "2024-01-05",
+      "sponsors": [
+        "Sen. Geraldine Moss"
+      ],
+      "sourceUrl": "https://example.gov/bills/pa/sb-2088"
+    },
+    {
+      "id": "bill-042",
+      "billNumber": "HB 1304",
+      "title": "Customer Experience Performance Standards Act",
+      "summary": "Establishes customer-experience performance standards for high-volume citizen services such as licensing and tax assistance. Requires agencies to publish wait-time and resolution-rate metrics monthly.",
+      "state": "AZ",
+      "status": "Vetoed",
+      "category": "Performance Measures",
+      "subcategory": "Service Experience Metrics",
+      "introducedDate": "2024-09-26",
+      "lastUpdated": "2025-06-03",
+      "sponsors": [
+        "Rep. Kendra Vogel",
+        "Rep. Omar Salazar"
+      ],
+      "sourceUrl": "https://example.gov/bills/az/hb-1304"
+    },
+    {
+      "id": "bill-043",
+      "billNumber": "SB 471",
+      "title": "Independent Outcome Evaluation Mandate Act",
+      "summary": "Requires major new spending programs above a defined threshold to commission independent outcome evaluations within three years of launch. Establishes a roster of prequalified evaluation vendors.",
+      "state": "MI",
+      "status": "Enacted",
+      "category": "Outcome Evaluations",
+      "subcategory": "Independent Program Evaluation",
+      "introducedDate": "2023-05-02",
+      "lastUpdated": "2024-09-16",
+      "sponsors": [
+        "Sen. Lauren Whitcomb",
+        "Sen. Andre Fontaine"
+      ],
+      "sourceUrl": "https://example.gov/bills/mi/sb-471"
+    },
+    {
+      "id": "bill-044",
+      "billNumber": "HB 2577",
+      "title": "Evidence-Based Policy Review Act",
+      "summary": "Creates an Evidence Review Office to assess whether proposed and existing programs are supported by credible outcome evidence. Requires legislative fiscal notes to cite available evaluation findings.",
+      "state": "VA",
+      "status": "In Committee",
+      "category": "Outcome Evaluations",
+      "subcategory": "Evidence-Based Policy",
+      "introducedDate": "2025-03-26",
+      "lastUpdated": "2025-11-08",
+      "sponsors": [
+        "Del. Samantha Ruiz"
+      ],
+      "sourceUrl": "https://example.gov/bills/va/hb-2577"
+    },
+    {
+      "id": "bill-045",
+      "billNumber": "SB 1109",
+      "title": "Randomized Evaluation Pilot Authorization",
+      "summary": "Authorizes agencies to conduct randomized controlled evaluations of selected social service interventions with ethics board oversight and informed consent where required. Directs publication of evaluation protocols before enrollment begins.",
+      "state": "NJ",
+      "status": "Passed",
+      "category": "Outcome Evaluations",
+      "subcategory": "Experimental Evaluation Design",
+      "introducedDate": "2024-06-12",
+      "lastUpdated": "2025-10-29",
+      "sponsors": [
+        "Sen. Howard Klein",
+        "Sen. Fatima El-Amin"
+      ],
+      "sourceUrl": "https://example.gov/bills/nj/sb-1109"
+    },
+    {
+      "id": "bill-046",
+      "billNumber": "HB 820",
+      "title": "Tax Credit Outcome Reporting Act",
+      "summary": "Requires recipients of major economic development tax credits to report employment and wage outcomes using standardized metrics. Authorizes clawbacks when committed outcomes are not achieved within the agreement period.",
+      "state": "NC",
+      "status": "Introduced",
+      "category": "Outcome Evaluations",
+      "subcategory": "Economic Development Outcomes",
+      "introducedDate": "2026-01-07",
+      "lastUpdated": "2026-03-22",
+      "sponsors": [
+        "Rep. Tyler McBride",
+        "Rep. Alicia Nguyen"
+      ],
+      "sourceUrl": "https://example.gov/bills/nc/hb-820"
+    },
+    {
+      "id": "bill-047",
+      "billNumber": "SB 3055",
+      "title": "Education Program Outcome Transparency Act",
+      "summary": "Requires state-funded education interventions to publish outcome evaluations covering student achievement, completion, and equity gaps. Creates a searchable repository of evaluation reports.",
+      "state": "GA",
+      "status": "Failed",
+      "category": "Outcome Evaluations",
+      "subcategory": "Education Outcomes",
+      "introducedDate": "2023-12-05",
+      "lastUpdated": "2024-06-27",
+      "sponsors": [
+        "Sen. Monica Fairchild"
+      ],
+      "sourceUrl": "https://example.gov/bills/ga/sb-3055"
+    },
+    {
+      "id": "bill-048",
+      "billNumber": "HB 1942",
+      "title": "Housing Assistance Impact Evaluation Act",
+      "summary": "Directs the housing finance agency to evaluate the impact of rental assistance and homelessness prevention programs on housing stability and employment. Requires a report to the legislature every two years.",
+      "state": "MN",
+      "status": "Vetoed",
+      "category": "Outcome Evaluations",
+      "subcategory": "Housing Program Impact",
+      "introducedDate": "2024-11-14",
+      "lastUpdated": "2025-08-07",
+      "sponsors": [
+        "Rep. Elise Norberg",
+        "Rep. Jamison Cole"
+      ],
+      "sourceUrl": "https://example.gov/bills/mn/hb-1942"
+    },
+    {
+      "id": "bill-049",
+      "billNumber": "SB 58",
+      "title": "Criminal Justice Diversion Outcome Study Act",
+      "summary": "Funds a multi-year outcome study of pretrial diversion and reentry programs, measuring recidivism, employment, and treatment engagement. Requires comparison groups and open data practices where legally permissible.",
+      "state": "CT",
+      "status": "Enacted",
+      "category": "Outcome Evaluations",
+      "subcategory": "Justice System Outcomes",
+      "introducedDate": "2023-02-07",
+      "lastUpdated": "2023-10-18",
+      "sponsors": [
+        "Sen. Bianca Ortiz",
+        "Sen. Craig Ellsworth",
+        "Sen. Nia Bradford"
+      ],
+      "sourceUrl": "https://example.gov/bills/ct/sb-58"
+    },
+    {
+      "id": "bill-050",
+      "billNumber": "HB 4211",
+      "title": "Health Program Cost-Effectiveness Evaluation Act",
+      "summary": "Requires periodic cost-effectiveness evaluations of major Medicaid pilot programs and chronic disease initiatives. Directs findings to inform reauthorization decisions and public reporting.",
+      "state": "MD",
+      "status": "In Committee",
+      "category": "Outcome Evaluations",
+      "subcategory": "Health Program Evaluation",
+      "introducedDate": "2025-04-15",
+      "lastUpdated": "2026-02-28",
+      "sponsors": [
+        "Del. Quentin Avery",
+        "Del. Rosa Kimura"
+      ],
+      "sourceUrl": "https://example.gov/bills/md/hb-4211"
+    }
+  ]
+}
