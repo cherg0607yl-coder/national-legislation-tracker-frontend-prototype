@@ -17,8 +17,13 @@ const MAP_ROWS: (string | null)[][] = [
 interface StateTileMapProps {
   statesWithData?: Set<string>;
   selectedState?: string | null;
+  /** Multi-select highlight (Policy Design). Takes precedence when provided. */
+  selectedStates?: string[];
   hoveredState?: string | null;
   billCounts?: Record<string, number>;
+  momentumLevels?: Record<string, 0 | 1 | 2 | 3>;
+  caption?: string;
+  ariaLabel?: string;
   onStateHover?: (state: string | null) => void;
   onStateSelect?: (state: string) => void;
 }
@@ -26,17 +31,22 @@ interface StateTileMapProps {
 export function StateTileMap({
   statesWithData,
   selectedState,
+  selectedStates,
   hoveredState,
   billCounts,
+  momentumLevels,
+  caption = "Nationwide by default · click a state to focus statistics",
+  ariaLabel = "Interactive United States map. Hover or click a state for statistics.",
   onStateHover,
   onStateSelect,
 }: StateTileMapProps) {
+  function isSelected(abbr: string): boolean {
+    if (selectedStates) return selectedStates.includes(abbr);
+    return selectedState === abbr;
+  }
+
   return (
-    <div
-      className="state-map animate-map"
-      role="group"
-      aria-label="Interactive United States map. Hover or click a state for statistics."
-    >
+    <div className="state-map animate-map" role="group" aria-label={ariaLabel}>
       <div className="state-map__grid">
         {MAP_ROWS.map((row, rowIndex) => (
           <div className="state-map__row" key={rowIndex}>
@@ -48,7 +58,10 @@ export function StateTileMap({
                   className={[
                     "state-tile",
                     statesWithData?.has(abbr) ? "has-data" : "",
-                    selectedState === abbr ? "is-selected" : "",
+                    momentumLevels?.[abbr]
+                      ? `momentum-${momentumLevels[abbr]}`
+                      : "",
+                    isSelected(abbr) ? "is-selected" : "",
                     hoveredState === abbr ? "is-hovered" : "",
                   ]
                     .filter(Boolean)
@@ -56,7 +69,7 @@ export function StateTileMap({
                   style={{
                     animationDelay: `${(rowIndex * 12 + colIndex) * 8}ms`,
                   }}
-                  aria-pressed={selectedState === abbr}
+                  aria-pressed={isSelected(abbr)}
                   aria-label={`${STATE_NAMES[abbr] ?? abbr}${
                     billCounts?.[abbr]
                       ? `, ${billCounts[abbr]} tracked bills`
@@ -84,9 +97,7 @@ export function StateTileMap({
           </div>
         ))}
       </div>
-      <p className="state-map__caption">
-        Nationwide by default · click a state to focus statistics
-      </p>
+      <p className="state-map__caption">{caption}</p>
     </div>
   );
 }

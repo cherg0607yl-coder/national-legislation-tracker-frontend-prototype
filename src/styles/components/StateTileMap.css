@@ -46,6 +46,26 @@
   background: color-mix(in srgb, var(--color-bg-surface) 70%, var(--color-bg-accent-subtle));
 }
 
+.state-tile.momentum-1 {
+  background: color-mix(in srgb, var(--color-bg-accent-subtle) 70%, white);
+  border-color: color-mix(in srgb, var(--color-border-accent) 45%, var(--color-border-subtle));
+  color: var(--color-text-secondary);
+}
+
+.state-tile.momentum-2 {
+  background: color-mix(in srgb, var(--color-bg-accent) 22%, white);
+  border-color: var(--color-border-accent);
+  color: var(--color-text-brand);
+  font-weight: 600;
+}
+
+.state-tile.momentum-3 {
+  background: color-mix(in srgb, var(--color-bg-accent) 38%, white);
+  border-color: var(--color-bg-accent);
+  color: var(--color-text-brand);
+  font-weight: 600;
+}
+
 .state-tile:hover,
 .state-tile:focus-visible,
 .state-tile.is-hovered {
