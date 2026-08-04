@@ -48,11 +48,47 @@ export interface BillAction {
   sourceUrl?: string;
 }
 
+export interface PolicyDesignCard {
+  headline: string;
+  detail: string;
+}
+
+export interface PolicyDesign {
+  coverage?: PolicyDesignCard;
+  administration?: PolicyDesignCard;
+  enforcement?: PolicyDesignCard;
+  accountability?: PolicyDesignCard;
+}
+
+export interface WhatChangesRow {
+  current: string;
+  billApproach: string;
+}
+
+export interface ConsiderationQuestion {
+  topic: string;
+  detail: string;
+}
+
+/**
+ * Editorial / briefing layer for bill detail.
+ * Legacy fields remain optional so older mock records still type-check.
+ */
 export interface BillEditorial {
   policyGoal?: string;
   problemAddressed?: string;
+  /** Preferred name for the “How This Bill Works” mechanism field. */
+  coreMechanism?: string;
+  /** @deprecated Prefer coreMechanism */
   policyMechanism?: string;
-  appliesTo?: string[];
+  appliesTo?: string | string[];
+  expectedResult?: string;
+
+  policyDesign?: PolicyDesign;
+  whatChanges?: WhatChangesRow[];
+  questions?: ConsiderationQuestion[];
+
+  /** @deprecated Prefer structured policyDesign + keyProvisions */
   requirements?: string[];
   implementation?: {
     responsibleAgency?: string;
@@ -72,6 +108,10 @@ export interface KeyProvision {
   description: string;
   sectionReference?: string;
   sourceUrl?: string;
+  trigger?: string;
+  deadline?: string;
+  exceptions?: string;
+  statutoryText?: string;
 }
 
 export interface BillDocument {
@@ -99,6 +139,7 @@ export interface Bill {
   introducedDate: string;
   lastUpdated: string;
   latestActionDate?: string;
+  effectiveDate?: string;
   session?: string;
   chamber?: string;
   billType?: string;

@@ -2,18 +2,17 @@ import { Link, useParams } from "react-router-dom";
 import { useMemo } from "react";
 import mockData from "../../data/mock-bills.json";
 import type { MockBillsData } from "../types/bill";
-import { getBillById, getRelatedBills } from "../lib/bills";
+import { getBillById } from "../lib/bills";
 import {
   BillBreadcrumbs,
-  BillEditorialLayer,
   BillHeader,
   BillMetadataSidebar,
-  BillOverview,
   BillStatusTimeline,
+  HowThisBillWorks,
   KeyProvisions,
-  PolicyTags,
-  RelatedBills,
-  SourceDocuments,
+  PolicyDesignSection,
+  QuestionsForConsideration,
+  WhatChanges,
 } from "../components/bill-detail";
 import "../styles/pages/BillDetailPage.css";
 
@@ -27,17 +26,14 @@ export function BillDetailPage() {
     [id],
   );
 
-  const related = useMemo(
-    () => (bill ? getRelatedBills(data.bills, bill) : []),
-    [bill],
-  );
-
   if (!id) {
     return (
       <section className="bill-detail section">
         <div className="container bill-detail__state">
           <h1>Bill not specified</h1>
-          <p>Choose a bill from search or the homepage to view its detail page.</p>
+          <p>
+            Choose a bill from search or the homepage to view its detail page.
+          </p>
           <Link to="/search" className="btn btn--primary">
             Search bills
           </Link>
@@ -73,13 +69,12 @@ export function BillDetailPage() {
         <div className="bill-detail__main">
           <BillBreadcrumbs bill={bill} />
           <BillHeader bill={bill} />
-          <BillOverview bill={bill} />
           <BillStatusTimeline key={bill.id} bill={bill} />
-          <BillEditorialLayer bill={bill} />
+          <HowThisBillWorks bill={bill} />
           <KeyProvisions bill={bill} />
-          <PolicyTags bill={bill} />
-          <RelatedBills bill={bill} related={related} />
-          <SourceDocuments bill={bill} />
+          <PolicyDesignSection bill={bill} />
+          <WhatChanges bill={bill} />
+          <QuestionsForConsideration bill={bill} />
         </div>
 
         <BillMetadataSidebar bill={bill} />

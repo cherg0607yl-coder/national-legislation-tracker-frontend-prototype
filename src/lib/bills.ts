@@ -254,3 +254,69 @@ export function policyTags(bill: Bill): string[] {
 export function categorySlugForBill(bill: Bill) {
   return categoryToSlug(bill.category);
 }
+
+export function formatAppliesTo(
+  appliesTo: string | string[] | undefined,
+): string | undefined {
+  if (!appliesTo) return undefined;
+  if (Array.isArray(appliesTo)) {
+    return appliesTo.length > 0 ? appliesTo.join("; ") : undefined;
+  }
+  return appliesTo;
+}
+
+export interface HowBillWorksModel {
+  policyGoal?: string;
+  problemAddressed?: string;
+  coreMechanism?: string;
+  appliesTo?: string;
+  expectedResult?: string;
+  hasContent: boolean;
+}
+
+export function getHowBillWorks(bill: Bill): HowBillWorksModel {
+  const ed = bill.editorial;
+  const policyGoal = ed?.policyGoal;
+  const problemAddressed = ed?.problemAddressed;
+  const coreMechanism = ed?.coreMechanism ?? ed?.policyMechanism;
+  const appliesTo = formatAppliesTo(ed?.appliesTo);
+  const expectedResult = ed?.expectedResult;
+  const hasContent = Boolean(
+    policyGoal ||
+      problemAddressed ||
+      coreMechanism ||
+      appliesTo ||
+      expectedResult,
+  );
+
+  return {
+    policyGoal,
+    problemAddressed,
+    coreMechanism,
+    appliesTo,
+    expectedResult,
+    hasContent,
+  };
+}
+
+export function getEffectiveDateLabel(bill: Bill): string | undefined {
+  return (
+    bill.effectiveDate ??
+    bill.editorial?.implementation?.effectiveDate ??
+    undefined
+  );
+}
+
+export function getPolicyDesign(bill: Bill) {
+  return bill.editorial?.policyDesign;
+}
+
+export function getWhatChanges(bill: Bill) {
+  return bill.editorial?.whatChanges ?? [];
+}
+
+export function getConsiderationQuestions(bill: Bill) {
+  const questions = bill.editorial?.questions ?? [];
+  return questions.slice(0, 3);
+}
+

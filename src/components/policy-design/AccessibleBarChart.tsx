@@ -16,11 +16,16 @@ interface AccessibleBarChartProps {
   /** Compact mode for hover previews. */
   compact?: boolean;
   emptyMessage?: string;
+  /** Keep input order instead of sorting by value. */
+  preserveOrder?: boolean;
+  /** Render bars in one or two columns (horizontal layout only). */
+  columns?: 1 | 2;
+  /** Horizontal (default) or vertical column chart. */
+  orientation?: "horizontal" | "vertical";
 }
 
 /**
- * Horizontal bar chart with visible labels/values and a text data table
- * for screen-reader users. Does not rely on color alone.
+ * Bar chart with visible labels/values. Does not rely on color alone.
  */
 export function AccessibleBarChart({
   title,
@@ -30,18 +35,32 @@ export function AccessibleBarChart({
   maxValue,
   compact = false,
   emptyMessage = "No data available for this chart.",
+  preserveOrder = false,
+  columns = 1,
+  orientation = "horizontal",
 }: AccessibleBarChartProps) {
   const chartId = `chart-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
   const max = maxValue ?? Math.max(1, ...data.map((d) => d.value));
-  const sorted = [...data].sort((a, b) => b.value - a.value || a.label.localeCompare(b.label));
+  const sorted = preserveOrder
+    ? [...data]
+    : [...data].sort((a, b) => b.value - a.value || a.label.localeCompare(b.label));
 
   if (sorted.length === 0) {
     return <p className="a11y-chart__empty">{emptyMessage}</p>;
   }
 
+  const isVertical = orientation === "vertical";
+  const figureClass = [
+    "a11y-chart",
+    compact ? "a11y-chart--compact" : "",
+    isVertical ? "a11y-chart--vertical" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <figure
-      className={compact ? "a11y-chart a11y-chart--compact" : "a11y-chart"}
+      className={figureClass}
       aria-labelledby={`${chartId}-title`}
       aria-describedby={description ? `${chartId}-desc` : undefined}
     >
@@ -56,72 +75,86 @@ export function AccessibleBarChart({
         )}
       </figcaption>
 
-      <ul className="a11y-chart__bars" role="list">
-        {sorted.map((item, index) => {
-          const widthPct = Math.max(4, Math.round((item.value / max) * 100));
-          return (
-            <li key={item.id} className="a11y-chart__row">
-              <div className="a11y-chart__label-row">
-                <span className="a11y-chart__rank" aria-hidden="true">
-                  {index + 1}.
-                </span>
-                <span className="a11y-chart__label">{item.label}</span>
-                <span className="a11y-chart__value">
-                  {item.value}
-                  <span className="sr-only">
-                    {" "}
-                    {unit}
-                    {item.note ? `, ${item.note}` : ""}
+      {isVertical ? (
+        <div className="a11y-chart__vertical-scroll">
+          <ul className="a11y-chart__vbars" role="list">
+            {sorted.map((item) => {
+              const heightPct =
+                item.value <= 0
+                  ? 0
+                  : Math.max(3, Math.round((item.value / max) * 100));
+              return (
+                <li key={item.id} className="a11y-chart__vcol">
+                  <span className="a11y-chart__vvalue" aria-hidden="true">
+                    {item.value}
                   </span>
-                  {item.note && (
-                    <span className="a11y-chart__note" aria-hidden="true">
+                  <div
+                    className="a11y-chart__vtrack"
+                    role="img"
+                    aria-label={`${item.label}: ${item.value} ${unit}`}
+                  >
+                    <div
+                      className={`a11y-chart__vfill${item.value === 0 ? " a11y-chart__vfill--zero" : ""}`}
+                      style={{ height: `${heightPct}%` }}
+                    />
+                  </div>
+                  <span className="a11y-chart__vlabel">{item.label}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : (
+        <ul
+          className={
+            columns === 2
+              ? "a11y-chart__bars a11y-chart__bars--two-col"
+              : "a11y-chart__bars"
+          }
+          role="list"
+        >
+          {sorted.map((item, index) => {
+            const widthPct =
+              item.value <= 0
+                ? 0
+                : Math.max(4, Math.round((item.value / max) * 100));
+            return (
+              <li key={item.id} className="a11y-chart__row">
+                <div className="a11y-chart__label-row">
+                  <span className="a11y-chart__rank" aria-hidden="true">
+                    {index + 1}.
+                  </span>
+                  <span className="a11y-chart__label">{item.label}</span>
+                  <span className="a11y-chart__value">
+                    {item.value}
+                    <span className="sr-only">
                       {" "}
-                      · {item.note}
+                      {unit}
+                      {item.note ? `, ${item.note}` : ""}
                     </span>
-                  )}
-                </span>
-              </div>
-              <div
-                className="a11y-chart__track"
-                role="img"
-                aria-label={`${item.label}: ${item.value} ${unit}`}
-              >
+                    {item.note && (
+                      <span className="a11y-chart__note" aria-hidden="true">
+                        {" "}
+                        · {item.note}
+                      </span>
+                    )}
+                  </span>
+                </div>
                 <div
-                  className="a11y-chart__fill"
-                  style={{ width: `${widthPct}%` }}
-                />
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-
-      <details className="a11y-chart__table-wrap">
-        <summary>View data table</summary>
-        <table className="a11y-chart__table">
-          <caption className="sr-only">
-            {title}
-            {description ? ` — ${description}` : ""}
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Category</th>
-              <th scope="col">{unit}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sorted.map((item) => (
-              <tr key={item.id}>
-                <th scope="row">{item.label}</th>
-                <td>
-                  {item.value}
-                  {item.note ? ` (${item.note})` : ""}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </details>
+                  className="a11y-chart__track"
+                  role="img"
+                  aria-label={`${item.label}: ${item.value} ${unit}`}
+                >
+                  <div
+                    className="a11y-chart__fill"
+                    style={{ width: `${widthPct}%` }}
+                  />
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </figure>
   );
 }
@@ -234,33 +267,6 @@ export function GroupedCompareChart({
           );
         })}
       </div>
-
-      <details className="a11y-chart__table-wrap">
-        <summary>View comparison data table</summary>
-        <table className="a11y-chart__table">
-          <caption className="sr-only">{title}</caption>
-          <thead>
-            <tr>
-              <th scope="col">Topic</th>
-              {topics[0]?.series.map((s) => (
-                <th key={s.state} scope="col">
-                  {s.stateName}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {topics.map((topic) => (
-              <tr key={topic.topic}>
-                <th scope="row">{topic.topic}</th>
-                {topic.series.map((s) => (
-                  <td key={s.state}>{s.value}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </details>
     </figure>
   );
 }

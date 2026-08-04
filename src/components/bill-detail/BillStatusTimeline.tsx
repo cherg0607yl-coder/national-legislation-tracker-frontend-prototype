@@ -34,7 +34,6 @@ function visibleStages(stages: TimelineStageView[]): TimelineStageView[] {
 }
 
 export function BillStatusTimeline({ bill }: BillStatusTimelineProps) {
-  const [historyOpen, setHistoryOpen] = useState(false);
   const timeline = buildTimeline(bill);
   const stages = useMemo(
     () => visibleStages(timeline.stages),
@@ -44,29 +43,23 @@ export function BillStatusTimeline({ bill }: BillStatusTimelineProps) {
   const [selectedStage, setSelectedStage] = useState<string | null>(
     current?.stage ?? null,
   );
-  const actions = bill.actions ?? [];
   const selected =
     stages.find((item) => item.stage === selectedStage) ?? current ?? null;
 
   return (
-    <section className="bill-section" aria-labelledby="timeline-heading">
-      <div className="bill-section__intro">
+    <section
+      className="bill-section bill-section--timeline"
+      aria-labelledby="timeline-heading"
+    >
+      <div className="bill-section__intro bill-section__intro--compact">
         <h2 id="timeline-heading">Legislative status</h2>
-        <p>
-          Progress through the legislative process
-          {timeline.hasActionHistory
-            ? ", based on recorded actions."
-            : "."}
-        </p>
+        {!timeline.hasActionHistory && (
+          <p>
+            Full action history is not yet available. Current stage reflects the
+            recorded status only.
+          </p>
+        )}
       </div>
-
-      {!timeline.hasActionHistory && (
-        <p className="bill-callout" role="status">
-          A complete legislative action history is not yet available for this
-          bill. The current stage below reflects the bill&apos;s recorded status
-          only.
-        </p>
-      )}
 
       <div className="status-timeline">
         <ol className="status-timeline__track" aria-label="Bill progress">
@@ -128,65 +121,6 @@ export function BillStatusTimeline({ bill }: BillStatusTimelineProps) {
               </p>
             )}
             {selected.description && <p>{selected.description}</p>}
-          </div>
-        )}
-      </div>
-
-      <div className="bill-history">
-        <button
-          type="button"
-          className="btn btn--secondary"
-          aria-expanded={historyOpen}
-          onClick={() => setHistoryOpen((open) => !open)}
-        >
-          {historyOpen ? "Hide full action history" : "View full action history"}
-        </button>
-
-        {historyOpen && (
-          <div className="bill-history__panel">
-            {actions.length === 0 ? (
-              <p className="bill-callout" role="status">
-                A complete legislative action history is not yet available for
-                this bill.
-              </p>
-            ) : (
-              <table className="bill-history__table">
-                <thead>
-                  <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Chamber</th>
-                    <th scope="col">Action</th>
-                    <th scope="col">Committee</th>
-                    <th scope="col">Source</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[...actions]
-                    .sort((a, b) => b.date.localeCompare(a.date))
-                    .map((action, index) => (
-                      <tr key={`${action.date}-${index}`}>
-                        <td>{formatOptionalDate(action.date)}</td>
-                        <td>{action.chamber ?? "—"}</td>
-                        <td>{action.action}</td>
-                        <td>{action.committee ?? "—"}</td>
-                        <td>
-                          {action.sourceUrl ? (
-                            <a
-                              href={action.sourceUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              View
-                            </a>
-                          ) : (
-                            "—"
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            )}
           </div>
         )}
       </div>

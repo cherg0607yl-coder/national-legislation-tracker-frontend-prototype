@@ -1,5 +1,5 @@
 import type { PolicyCategory } from "../../types/bill";
-import { POLICY_DESIGN_CATEGORIES } from "../../lib/policyDesign";
+import { POLICY_EXPLORATION_CATEGORIES } from "../../lib/policyExploration";
 
 interface CategoryFocusPickerProps {
   onSelect: (category: PolicyCategory) => void;
@@ -8,16 +8,16 @@ interface CategoryFocusPickerProps {
 export function CategoryFocusPicker({ onSelect }: CategoryFocusPickerProps) {
   return (
     <section
-      className="policy-design-stage"
-      aria-labelledby="policy-design-category-heading"
+      className="policy-explore-stage"
+      aria-labelledby="policy-explore-category-heading"
     >
-      <div className="section-heading policy-design-stage__intro">
-        <p className="policy-design-eyebrow">Policy Design · Stage 1</p>
-        <h1 id="policy-design-category-heading">Choose a policy focus</h1>
+      <div className="section-heading policy-explore-stage__intro">
+        <p className="policy-explore-eyebrow">Policy Exploration · Stage 1</p>
+        <h1 id="policy-explore-category-heading">Choose a policy focus</h1>
         <p>
-          Select a research theme to explore legislative momentum across
-          states, surface distinctive state approaches, and identify policy
-          gaps worth filling.
+          Select a research theme to explore legislative momentum nationwide or
+          by state across structured activity, coverage, progression,
+          institutionalization, and innovation dimensions.
         </p>
       </div>
 
@@ -26,7 +26,7 @@ export function CategoryFocusPicker({ onSelect }: CategoryFocusPickerProps) {
         role="list"
         aria-label="Policy categories"
       >
-        {POLICY_DESIGN_CATEGORIES.map((item) => {
+        {POLICY_EXPLORATION_CATEGORIES.map((item) => {
           if (!item.available) {
             return (
               <div

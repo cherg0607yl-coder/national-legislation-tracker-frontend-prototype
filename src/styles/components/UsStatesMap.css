@@ -1,0 +1,73 @@
+.us-map {
+  display: grid;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.us-map__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: color-mix(in srgb, var(--color-bg-page) 70%, white);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.us-map__state {
+  fill: color-mix(in srgb, var(--color-bg-surface-muted) 80%, white);
+  stroke: var(--color-border-default);
+  stroke-width: 1;
+  cursor: pointer;
+  transition:
+    fill 140ms ease,
+    stroke 140ms ease,
+    stroke-width 140ms ease;
+}
+
+.us-map__state--m1 {
+  fill: color-mix(in srgb, var(--color-bg-accent-subtle) 75%, white);
+}
+
+.us-map__state--m2 {
+  fill: color-mix(in srgb, var(--color-bg-accent) 28%, white);
+}
+
+.us-map__state--m3 {
+  fill: color-mix(in srgb, var(--color-bg-accent) 48%, white);
+}
+
+.us-map__state.is-hovered,
+.us-map__state:focus-visible {
+  fill: color-mix(in srgb, var(--color-bg-accent) 35%, #f4e7c8);
+  stroke: var(--color-text-brand);
+  stroke-width: 1.5;
+  outline: none;
+}
+
+.us-map__state.is-selected {
+  fill: var(--color-bg-accent);
+  stroke: var(--color-text-brand);
+  stroke-width: 1.75;
+}
+
+.us-map__label {
+  fill: var(--color-text-brand);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-anchor: middle;
+  pointer-events: none;
+  user-select: none;
+}
+
+.us-map__state-group:has(.us-map__state.is-selected) .us-map__label {
+  fill: var(--color-text-on-accent);
+}
+
+.us-map__caption {
+  margin: 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}

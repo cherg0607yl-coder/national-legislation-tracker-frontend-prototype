@@ -1,10 +1,10 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import { HomePage } from "./pages/HomePage";
 import { SearchPage } from "./pages/SearchPage";
 import { BillDetailPage } from "./pages/BillDetailPage";
-import { PolicyDesignPage } from "./pages/PolicyDesignPage";
+import { PolicyExplorationPage } from "./pages/PolicyExplorationPage";
 import { PlaceholderPage } from "./pages/PlaceholderPage";
 
 export default function App() {
@@ -16,7 +16,14 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/search" element={<SearchPage />} />
-            <Route path="/policy-design" element={<PolicyDesignPage />} />
+            <Route
+              path="/policy-exploration"
+              element={<PolicyExplorationPage />}
+            />
+            <Route
+              path="/policy-design"
+              element={<Navigate to="/policy-exploration" replace />}
+            />
             <Route path="/bills/:id" element={<BillDetailPage />} />
             <Route
               path="/about"

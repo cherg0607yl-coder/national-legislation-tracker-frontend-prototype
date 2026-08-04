@@ -4,7 +4,7 @@ import "../styles/components/Navigation.css";
 const links = [
   { to: "/", label: "Home", end: true },
   { to: "/search", label: "Search Bills", end: false },
-  { to: "/policy-design", label: "Policy Design", end: false },
+  { to: "/policy-exploration", label: "Policy Exploration", end: false },
   { to: "/about", label: "About", end: false },
 ] as const;
 

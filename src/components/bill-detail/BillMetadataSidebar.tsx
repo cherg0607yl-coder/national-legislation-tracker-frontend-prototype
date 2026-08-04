@@ -4,6 +4,7 @@ import {
   billStateLabel,
   displayStatus,
   formatOptionalDate,
+  getEffectiveDateLabel,
 } from "../../lib/bills";
 import { OfficialSourceLinks } from "./OfficialSourceLinks";
 import { SponsorList } from "./SponsorList";
@@ -24,17 +25,18 @@ function MetaRow({ label, value }: { label: string; value?: string | null }) {
 
 export function BillMetadataSidebar({ bill }: BillMetadataSidebarProps) {
   const committees = bill.committees?.filter(Boolean) ?? [];
+  const versions = bill.documents ?? [];
+  const status = displayStatus(bill);
 
   return (
-    <aside className="bill-sidebar" aria-label="Bill information">
+    <aside className="bill-sidebar" aria-label="Bill metadata">
       <section className="bill-sidebar__block">
-        <h2>Bill information</h2>
+        <h2>Status</h2>
+        <p className="bill-sidebar__status">{status}</p>
         <dl className="bill-meta-list">
           <MetaRow label="State" value={billStateLabel(bill)} />
-          <MetaRow label="Bill number" value={bill.billNumber} />
-          <MetaRow label="Legislative session" value={billSessionLabel(bill)} />
+          <MetaRow label="Session" value={billSessionLabel(bill)} />
           <MetaRow label="Chamber" value={bill.chamber} />
-          <MetaRow label="Bill type" value={bill.billType} />
           <MetaRow
             label="Introduced"
             value={formatOptionalDate(bill.introducedDate)}
@@ -45,8 +47,7 @@ export function BillMetadataSidebar({ bill }: BillMetadataSidebarProps) {
               bill.latestActionDate ?? bill.lastUpdated,
             )}
           />
-          <MetaRow label="Current status" value={displayStatus(bill)} />
-          <MetaRow label="Policy category" value={bill.category} />
+          <MetaRow label="Effective date" value={getEffectiveDateLabel(bill)} />
         </dl>
       </section>
 
@@ -66,8 +67,34 @@ export function BillMetadataSidebar({ bill }: BillMetadataSidebarProps) {
         </section>
       )}
 
+      {versions.length > 0 && (
+        <section className="bill-sidebar__block">
+          <h2>Bill versions</h2>
+          <ul className="bill-sidebar__versions">
+            {versions.map((doc) => (
+              <li key={`${doc.name}-${doc.url}`}>
+                <a
+                  href={doc.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {doc.name}
+                </a>
+                {(doc.date || doc.type) && (
+                  <span>
+                    {[doc.type, formatOptionalDate(doc.date)]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section className="bill-sidebar__block">
-        <h2>Official source</h2>
+        <h2>Official links</h2>
         <OfficialSourceLinks bill={bill} />
       </section>
     </aside>
