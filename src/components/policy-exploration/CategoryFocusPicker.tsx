@@ -16,8 +16,8 @@ export function CategoryFocusPicker({ onSelect }: CategoryFocusPickerProps) {
         <h1 id="policy-explore-category-heading">Choose a policy focus</h1>
         <p>
           Select a research theme to explore legislative momentum nationwide or
-          by state across structured activity, coverage, progression,
-          institutionalization, and innovation dimensions.
+          by state across structured activity, coverage, progression, and
+          institutionalization dimensions.
         </p>
       </div>
 

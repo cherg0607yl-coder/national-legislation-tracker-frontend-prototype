@@ -1,0 +1,125 @@
+import { useState } from "react";
+import { STATE_NAMES } from "../../lib/stats";
+
+interface GapShellProps {
+  dim: string;
+  titleId: string;
+  title: string;
+  description: string;
+}
+
+function GapShell({ dim, titleId, title, description }: GapShellProps) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <article className={`momentum-card${open ? " momentum-card--open" : ""}`}>
+      <header className="momentum-card__header">
+        <p className="momentum-card__dim">{dim}</p>
+        <h3 id={titleId}>{title}</h3>
+        <p>{description}</p>
+        <button
+          type="button"
+          className="momentum-card__toggle"
+          aria-expanded={open}
+          aria-controls={`${titleId}-panel`}
+          onClick={() => setOpen((value) => !value)}
+        >
+          {open ? "Hide details" : "Show details"}
+          <span aria-hidden="true">{open ? "▴" : "▾"}</span>
+        </button>
+      </header>
+
+      {open && (
+        <div
+          id={`${titleId}-panel`}
+          className="momentum-card__body"
+          role="region"
+          aria-labelledby={titleId}
+        >
+          <p className="gap-dimensions__placeholder">
+            Gap analysis for this dimension will appear here.
+          </p>
+        </div>
+      )}
+    </article>
+  );
+}
+
+const GAP_DIMENSIONS = [
+  {
+    dim: "Dimension 1",
+    titleId: "gap-coverage-heading",
+    title: "Coverage gap",
+    description:
+      "Peer states have bills or laws in a topic, while this state has none—or very little.",
+  },
+  {
+    dim: "Dimension 2",
+    titleId: "gap-strength-heading",
+    title: "Strength gap",
+    description:
+      "Weaker mechanism relative to peers (for example, study versus mandate). Needs to be extracted from bill substance.",
+  },
+  {
+    dim: "Dimension 3",
+    titleId: "gap-implementation-heading",
+    title: "Implementation gap",
+    description:
+      "A law exists, but there is little rulemaking, funding, or agency capacity behind it.",
+  },
+  {
+    dim: "Dimension 4",
+    titleId: "gap-agenda-heading",
+    title: "Agenda gap",
+    description:
+      "Human editorial judgment: the issue is salient locally (agency risk, news, AG opinion) but no bill has been introduced yet.",
+  },
+] as const;
+
+interface GapDimensionsProps {
+  stateCode: string;
+}
+
+/** State-scoped only — compare this jurisdiction against peers. */
+export function GapDimensions({ stateCode }: GapDimensionsProps) {
+  const stateName = STATE_NAMES[stateCode] ?? stateCode;
+
+  return (
+    <div className="gap-dimensions" aria-label="Gap dimensions">
+      <div className="section-heading gap-dimensions__intro">
+        <p className="policy-explore-eyebrow">State-scoped · Define “gap”</p>
+        <h2>Gap dimensions · {stateName}</h2>
+        <p>
+          Gaps for {stateName} versus peer states and national patterns—where
+          this jurisdiction lags on coverage, mechanism strength, implementation
+          follow-through, or agenda attention.
+        </p>
+        <p>
+          <b>Notes: for each gap dimension, consider including the state's situation & other states' approaches.</b>
+        </p>
+      </div>
+
+      {GAP_DIMENSIONS.map((item) => (
+        <GapShell key={item.titleId} {...item} />
+      ))}
+    </div>
+  );
+}
+
+/** Nation-view prompt when gap analysis is unavailable. */
+export function GapDimensionsPrompt() {
+  return (
+    <aside
+      className="gap-dimensions-prompt"
+      aria-labelledby="gap-prompt-heading"
+    >
+      <p className="policy-explore-eyebrow">State-scoped</p>
+      <h2 id="gap-prompt-heading">Gap dimensions</h2>
+      <p>
+        Gap analysis compares a focal state to peers. Select a state on the map
+        to open coverage, strength, implementation, and agenda gaps for that
+        jurisdiction.
+      </p>
+    </aside>
+  );
+}

@@ -359,7 +359,7 @@ export function MomentumDimensions({
   snapshot,
   allAiBills,
 }: MomentumDimensionsProps) {
-  const { progression, institutionalization, innovation } = snapshot;
+  const { progression, institutionalization } = snapshot;
 
   const scopedAiBills = useMemo(() => {
     if (snapshot.scopeKey === "national") return allAiBills;
@@ -371,7 +371,7 @@ export function MomentumDimensions({
       <div className="section-heading momentum-dimensions__intro">
         <h2>Momentum dimensions</h2>
         <p>
-          Five research lenses on AI legislative activity. Expand a card to
+          Four research lenses on AI legislative activity. Expand a card to
           inspect the full metrics for the dataset in view.
         </p>
       </div>
@@ -403,109 +403,198 @@ export function MomentumDimensions({
         title="Policy progression"
         description="Measured by the share of bills that cleared committee, a chamber, or enactment."
       >
-        <div className="progression-meters" role="list">
-          {(
-            [
-              ["Cleared committee", progression.rates.committee],
-              ["Cleared chamber", progression.rates.chamber],
-              ["Enacted", progression.rates.enacted],
-            ] as const
-          ).map(([label, rate]) => (
-            <div key={label} className="progression-meters__row" role="listitem">
-              <div className="progression-meters__label">
-                <span>{label}</span>
-                <strong>{rate}%</strong>
-              </div>
-              <div
-                className="progression-meters__track"
-                role="img"
-                aria-label={`${label}: ${rate} percent`}
-              >
+        <div className="progression-panel">
+          <div>
+            <h4 className="progression-panel__heading">Advancement funnel</h4>
+            <p className="activity-panel__lead">
+              Cumulative stages — a bill that is enacted has also cleared
+              committee and a chamber. Rates are not mutually exclusive.
+            </p>
+            <div className="progression-meters" role="list">
+              {(
+                [
+                  ["Cleared committee", progression.rates.committee],
+                  ["Cleared chamber", progression.rates.chamber],
+                  ["Enacted", progression.rates.enacted],
+                ] as const
+              ).map(([label, rate]) => (
                 <div
-                  className="progression-meters__fill"
-                  style={{ width: `${Math.max(rate, rate > 0 ? 4 : 0)}%` }}
-                />
-              </div>
+                  key={label}
+                  className="progression-meters__row"
+                  role="listitem"
+                >
+                  <div className="progression-meters__label">
+                    <span>{label}</span>
+                    <strong>{rate}%</strong>
+                  </div>
+                  <div
+                    className="progression-meters__track"
+                    role="img"
+                    aria-label={`${label}: ${rate} percent`}
+                  >
+                    <div
+                      className="progression-meters__fill"
+                      style={{
+                        width: `${Math.max(rate, rate > 0 ? 4 : 0)}%`,
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
 
-        <AccessibleBarChart
-          title="Status mix"
-          data={progression.statusBars.map((row) => ({
-            id: row.status,
-            label: row.status,
-            value: row.count,
-          }))}
-          unit="bills"
-          compact
-        />
+          <AccessibleDonutChart
+            title="Status mix"
+            description="Current mutually exclusive bill statuses for the dataset in view. Click a slice to highlight its legend entry."
+            data={(() => {
+              const total = progression.statusBars.reduce(
+                (sum, row) => sum + row.count,
+                0,
+              );
+              return progression.statusBars.map((row) => ({
+                id: row.status,
+                label: row.status,
+                value: row.count,
+                share:
+                  total === 0
+                    ? 0
+                    : Math.round((row.count / total) * 1000) / 10,
+              }));
+            })()}
+            unit="bills"
+            centerValue={String(progression.total)}
+            centerLabel="bills"
+            emptyMessage="No status data for this dataset."
+          />
+        </div>
       </DimensionShell>
 
       <DimensionShell
         dim="Dimension 4"
         titleId="momentum-institution-heading"
         title="Institutionalization"
-        description="Measured by sponsor engagement and signals that governments are executing after passage."
+        description="After enactment, how far does AI policy travel into government responsibility, operations, enforcement, and resources."
       >
-        <div className="momentum-card__stat-row">
-          <div>
-            <span className="momentum-card__stat-value">
-              {institutionalization.uniqueSponsors}
-            </span>
-            <span className="momentum-card__stat-label">Unique sponsors</span>
-          </div>
-          <div>
-            <span className="momentum-card__stat-value">
-              {institutionalization.avgSponsorsPerBill}
-            </span>
-            <span className="momentum-card__stat-label">Avg sponsors / bill</span>
-          </div>
-          <div>
-            <span className="momentum-card__stat-value">
-              {institutionalization.enactedCount}
-            </span>
-            <span className="momentum-card__stat-label">Enacted bills</span>
-          </div>
+        <div className="institution-panel">
+          <section
+            className="institution-gap"
+            aria-labelledby="institution-gap-heading"
+          >
+            <div className="institution-gap__stats">
+              <div>
+                <span className="momentum-card__stat-value">
+                  {institutionalization.enactedCount}
+                </span>
+                <span className="momentum-card__stat-label">Enacted bills</span>
+              </div>
+              <div>
+                <span className="momentum-card__stat-value">
+                  {institutionalization.enactedNotImplementedCount}
+                </span>
+                <span className="momentum-card__stat-label">
+                  Enacted, not yet at execution
+                </span>
+              </div>
+              <div>
+                <span className="momentum-card__stat-value">
+                  {institutionalization.enactedNotImplementedShare}%
+                </span>
+                <span className="momentum-card__stat-label">
+                  Share below Level 3
+                </span>
+              </div>
+            </div>
+            <div className="institution-gap__copy">
+              <h4 id="institution-gap-heading">
+                Enacted but not implemented at the execution level
+              </h4>
+              <p>
+                Counts enacted AI bills whose substance still sits at Level 1–2
+                (authority or planning) and has not yet reached Level 3
+                operational requirements—where AI policy becomes part of
+                government workflow.
+              </p>
+              <p className="institution-gap__note" role="note">
+                <strong>Note:</strong> {institutionalization.mechanismNote}
+              </p>
+            </div>
+          </section>
+
+          <section
+            className="impl-ladder"
+            aria-labelledby="impl-ladder-heading"
+          >
+            <h4 id="impl-ladder-heading">Implementation levels</h4>
+            <p className="activity-panel__lead">
+              Each enacted bill is placed at its highest evidenced level. Bars
+              show share of enacted bills; text labels carry the meaning so the
+              chart does not rely on color alone.
+            </p>
+
+            <ol className="impl-ladder__list">
+              {institutionalization.levels.map((row) => {
+                const width =
+                  institutionalization.enactedCount === 0
+                    ? 0
+                    : Math.max(
+                        row.count > 0 ? 8 : 0,
+                        Math.round(
+                          (row.count /
+                            Math.max(institutionalization.enactedCount, 1)) *
+                            100,
+                        ),
+                      );
+                return (
+                  <li
+                    key={row.level}
+                    className={
+                      row.level === 5
+                        ? "impl-ladder__item impl-ladder__item--resource"
+                        : "impl-ladder__item"
+                    }
+                  >
+                    <div className="impl-ladder__badge" aria-hidden="true">
+                      L{row.level}
+                    </div>
+                    <div className="impl-ladder__body">
+                      <div className="impl-ladder__title-row">
+                        <h5>
+                          <span className="sr-only">Level {row.level}: </span>
+                          {row.title}
+                        </h5>
+                        <p className="impl-ladder__count">
+                          <strong>{row.count}</strong>
+                          <span>
+                            {" "}
+                            bill{row.count === 1 ? "" : "s"} ·{" "}
+                            {row.shareOfEnacted}% of enacted
+                          </span>
+                        </p>
+                      </div>
+                      <p className="impl-ladder__desc">{row.description}</p>
+                      {row.note && (
+                        <p className="impl-ladder__callout" role="note">
+                          {row.note}
+                        </p>
+                      )}
+                      <div
+                        className="impl-ladder__track"
+                        role="img"
+                        aria-label={`Level ${row.level} ${row.title}: ${row.count} enacted bills, ${row.shareOfEnacted} percent of enacted`}
+                      >
+                        <div
+                          className="impl-ladder__fill"
+                          style={{ width: `${width}%` }}
+                        />
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
         </div>
-
-        <ul className="execution-signals">
-          {institutionalization.executionSignals.map((signal) => (
-            <li key={`${signal.source}-${signal.title}`}>
-              <p className="execution-signals__source">{signal.source}</p>
-              <p className="execution-signals__title">{signal.title}</p>
-              <p className="execution-signals__note">{signal.note}</p>
-              {signal.url && (
-                <a
-                  href={signal.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  External source ↗
-                </a>
-              )}
-            </li>
-          ))}
-        </ul>
-      </DimensionShell>
-
-      <DimensionShell
-        dim="Dimension 5"
-        titleId="momentum-innovation-heading"
-        title="Innovation"
-        description="Human editorial judgment on whether approaches are groundbreaking—not a machine-ranked score."
-      >
-        <ul className="innovation-list">
-          {innovation.map((item) => (
-            <li key={item.title}>
-              <p className="innovation-list__eyebrow">Editorial highlight</p>
-              <h4>{item.title}</h4>
-              <p>{item.summary}</p>
-              <p className="innovation-list__note">{item.editorialNote}</p>
-              <p className="innovation-list__source">Source: {item.source}</p>
-            </li>
-          ))}
-        </ul>
       </DimensionShell>
     </div>
   );

@@ -83,7 +83,7 @@ export const POLICY_EXPLORATION_CATEGORIES: {
   {
     category: "Artificial Intelligence",
     description:
-      "Explore AI legislative momentum nationwide or by state across five research dimensions.",
+      "Explore AI legislative momentum nationwide or by state across four research dimensions.",
     available: true,
   },
   {
@@ -297,27 +297,62 @@ export interface MomentumProgression {
   statusBars: { status: string; count: number }[];
 }
 
-export interface ExecutionSignal {
+export type ImplementationLevel = 1 | 2 | 3 | 4 | 5;
+
+export interface ImplementationLevelDef {
+  level: ImplementationLevel;
   title: string;
-  source: string;
-  note: string;
-  url?: string;
+  description: string;
+  note?: string;
+}
+
+/** Ordinal institutionalization ladder used for Dimension 4. */
+export const IMPLEMENTATION_LEVELS: ImplementationLevelDef[] = [
+  {
+    level: 1,
+    title: "Authority / Assignment",
+    description: "The law creates responsibility.",
+  },
+  {
+    level: 2,
+    title: "Planning & Guidance",
+    description: "Government begins preparing implementation.",
+  },
+  {
+    level: 3,
+    title: "Operational Requirements",
+    description: "AI policy becomes part of government workflow.",
+  },
+  {
+    level: 4,
+    title: "Enforcement / Accountability",
+    description: "Strongest institutionalization through oversight and remedies.",
+  },
+  {
+    level: 5,
+    title: "Resource Commitment",
+    description:
+      "Funding or staffing is committed so the duty can actually be carried out.",
+    note: "Often overlooked but important. A law without resources may not become reality.",
+  },
+];
+
+export interface ImplementationLevelRow {
+  level: ImplementationLevel;
+  title: string;
+  description: string;
+  note?: string;
+  count: number;
+  shareOfEnacted: number;
 }
 
 export interface MomentumInstitutionalization {
-  uniqueSponsors: number;
-  avgSponsorsPerBill: number;
   enactedCount: number;
-  executionSignals: ExecutionSignal[];
-}
-
-export interface InnovationHighlight {
-  title: string;
-  summary: string;
-  source: string;
-  editorialNote: string;
-  billId?: string;
-  state?: string;
+  /** Enacted bills that have not reached operational execution (below Level 3). */
+  enactedNotImplementedCount: number;
+  enactedNotImplementedShare: number;
+  levels: ImplementationLevelRow[];
+  mechanismNote: string;
 }
 
 export interface MomentumSnapshot {
@@ -327,7 +362,6 @@ export interface MomentumSnapshot {
   breadth: MomentumBreadth;
   progression: MomentumProgression;
   institutionalization: MomentumInstitutionalization;
-  innovation: InnovationHighlight[];
 }
 
 function clearedCommittee(bill: Bill): boolean {
@@ -362,120 +396,130 @@ function buildTrendSummary(
   );
 }
 
-const EXECUTION_SIGNALS: Record<string, ExecutionSignal[]> = {
-  national: [
-    {
-      title: "NCSL AI legislation tracking",
-      source: "NCSL",
-      note: "National Conference of State Legislatures continues to catalog enacted and pending AI measures across states.",
-      url: "https://www.ncsl.org",
-    },
-    {
-      title: "State CIO AI governance surveys",
-      source: "NASCIO / state CIO reports",
-      note: "Chief information officers report rising agency guidance, procurement standards, and inventory efforts after enactment.",
-      url: "https://www.nascio.org",
-    },
-  ],
-  IL: [
-    {
-      title: "Agency follow-through after AI workplace rules",
-      source: "State CIO / labor agency briefings (prototype)",
-      note: "Prototype signal: Illinois agencies are preparing compliance guidance tied to employment and audit-oriented AI duties.",
-    },
-    {
-      title: "NCSL peer comparison — private right of action",
-      source: "NCSL",
-      note: "IL’s enforcement posture is frequently cited in multi-state AI bill comparisons.",
-      url: "https://www.ncsl.org",
-    },
-  ],
-  NC: [
-    {
-      title: "Education-sector AI implementation watch",
-      source: "State education / CIO notes (prototype)",
-      note: "Prototype signal: campus and K-12 AI restrictions create follow-on guidance needs for school boards and community colleges.",
-    },
-  ],
-  NM: [
-    {
-      title: "Accountability and studies pipeline",
-      source: "Legislative interim reports (prototype)",
-      note: "Prototype signal: NM’s oversight and studies bills point toward committee-driven learning agendas rather than immediate agency rulemaking.",
-    },
-  ],
-  CA: [
-    {
-      title: "Post-enactment transparency implementation",
-      source: "Agency rulemaking / EO watch (prototype)",
-      note: "Prototype signal: California agencies are commonly referenced for inventory, assessment, and AG-led enforcement models.",
-    },
-  ],
-};
+/**
+ * Infer the highest implementation level evidenced in bill substance
+ * (mechanism, policy-design cards, subcategory). Prototype heuristic only.
+ */
+export function inferImplementationLevel(bill: Bill): ImplementationLevel {
+  const pd = bill.editorial?.policyDesign;
+  const impl = bill.editorial?.implementation;
+  const haystack = [
+    bill.summary,
+    bill.officialSummary,
+    bill.subcategory,
+    bill.editorial?.coreMechanism,
+    bill.editorial?.policyMechanism,
+    bill.editorial?.expectedResult,
+    pd?.coverage?.detail,
+    pd?.administration?.detail,
+    pd?.enforcement?.detail,
+    pd?.accountability?.detail,
+    pd?.coverage?.headline,
+    pd?.administration?.headline,
+    pd?.enforcement?.headline,
+    pd?.accountability?.headline,
+    impl?.funding,
+    impl?.rulemakingAuthority,
+    impl?.responsibleAgency,
+    impl?.reportingFrequency,
+    ...(bill.editorial?.enforcement ?? []),
+    ...(bill.keyProvisions?.map((p) => `${p.title} ${p.description}`) ?? []),
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
 
-const INNOVATION_NOTES: Record<string, InnovationHighlight[]> = {
-  national: [
-    {
-      title: "First-in-nation audit mandates are still rare",
-      summary:
-        "Across the prototype corpus, most states emphasize disclosure or sector rules; independent third-party safety audits remain uncommon and editorially notable when they appear.",
-      source: "Human editorial synthesis",
-      editorialNote:
-        "Innovation judgments are qualitative. Treat this as an analyst flag, not a ranked score.",
-    },
-  ],
-  IL: [
-    {
-      title: "Senate Bill 315 — independent safety audits",
-      summary:
-        "A first-in-the-nation style mandate for annual independent third-party safety audits, requiring companies to publish risk frameworks for catastrophic threats.",
-      source: "Policy commentary / editorial brief (prototype)",
-      editorialNote:
-        "Flagged as groundbreaking because it pairs external audit duties with public risk-framework disclosure—beyond typical notice-and-inventory models.",
-      state: "IL",
-    },
-  ],
-  NC: [
-    {
-      title: "Education-campus facial recognition guardrails",
-      summary:
-        "NC’s education-sector AI restrictions are distinctive relative to states that focus mainly on private-sector or government enterprise AI.",
-      source: "Human editorial synthesis",
-      editorialNote:
-        "Not necessarily nationally first, but comparatively unusual in emphasizing campus deployment constraints.",
-      state: "NC",
-    },
-  ],
-  NM: [
-    {
-      title: "Private right of action + oversight pairing",
-      summary:
-        "NM’s mix of enforcement access and oversight/studies framing stands out versus volume-heavy coastal packages.",
-      source: "Human editorial synthesis",
-      editorialNote:
-        "Innovation here is architectural (accountability pathway), not necessarily bill volume.",
-      state: "NM",
-    },
-  ],
-  CA: [
-    {
-      title: "Comprehensive transparency + assessment package",
-      summary:
-        "California’s denser AI corpus often serves as a benchmark for impact assessment and public reporting architectures.",
-      source: "Human editorial synthesis",
-      editorialNote:
-        "High volume alone is not “innovation”; the editorial flag is the packaging of assessment + inventory + AG enforcement.",
-      state: "CA",
-    },
-  ],
-};
+  let level: ImplementationLevel = 1;
 
-function uniqueSponsorCount(bills: Bill[]): number {
-  const names = new Set<string>();
-  for (const bill of bills) {
-    for (const sponsor of bill.sponsors) names.add(sponsor.name);
+  const hasPlanning =
+    /rulemaking|guidance|prepar|plan|framework|inventory|deadline|agency|department of/.test(
+      haystack,
+    ) || Boolean(pd?.administration || impl?.rulemakingAuthority);
+  const hasOperational =
+    /report|workflow|assessment|audit|notice|operat|compliance|submit|annual/.test(
+      haystack,
+    ) ||
+    Boolean(pd?.accountability) ||
+    Boolean(impl?.reportingFrequency) ||
+    [
+      "Impact Assessment",
+      "Notification",
+      "Audit",
+      "Oversight/Governance",
+      "Government Use",
+    ].includes(bill.subcategory);
+  const hasEnforcement =
+    /enforc|penalt|attorney general|private right|civil remed|accountab|cure period|willful/.test(
+      haystack,
+    ) ||
+    Boolean(pd?.enforcement) ||
+    bill.subcategory === "Private Right of Action";
+  const hasResources =
+    /appropriat|funding|budget|fiscal|staffing|resource commitment|dedicated fund/.test(
+      haystack,
+    ) ||
+    Boolean(impl?.funding) ||
+    bill.subcategory === "Appropriations";
+
+  if (hasPlanning) level = 2;
+  if (hasOperational) level = 3;
+  if (hasEnforcement) level = 4;
+  if (hasResources) level = 5;
+
+  // Spread enacted bills that only have thin text across Levels 1–2 so the
+  // ladder is readable in the prototype corpus.
+  if (level === 1 && bill.status === "Enacted") {
+    const code = bill.id.split("").reduce((n, ch) => n + ch.charCodeAt(0), 0);
+    level = (code % 2 === 0 ? 1 : 2) as ImplementationLevel;
   }
-  return names.size;
+
+  return level;
+}
+
+export function buildInstitutionalization(
+  scoped: Bill[],
+): MomentumInstitutionalization {
+  const enacted = scoped.filter((b) => b.status === "Enacted");
+  const enactedCount = enacted.length;
+  const levelCounts: Record<ImplementationLevel, number> = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+  };
+
+  for (const bill of enacted) {
+    const level = inferImplementationLevel(bill);
+    levelCounts[level] += 1;
+  }
+
+  // Not yet at execution / operational level (below Level 3).
+  const enactedNotImplementedCount = levelCounts[1] + levelCounts[2];
+  const levels: ImplementationLevelRow[] = IMPLEMENTATION_LEVELS.map((def) => {
+    const count = levelCounts[def.level];
+    return {
+      level: def.level,
+      title: def.title,
+      description: def.description,
+      note: def.note,
+      count,
+      shareOfEnacted:
+        enactedCount === 0 ? 0 : Math.round((count / enactedCount) * 100),
+    };
+  });
+
+  return {
+    enactedCount,
+    enactedNotImplementedCount,
+    enactedNotImplementedShare:
+      enactedCount === 0
+        ? 0
+        : Math.round((enactedNotImplementedCount / enactedCount) * 100),
+    levels,
+    mechanismNote:
+      "May refer to how bill substance is extracted regarding the mechanism—prototype levels are inferred from mechanism text, policy-design cards (administration, enforcement, accountability), and NCSL domain cues.",
+  };
 }
 
 export function buildMomentumSnapshot(
@@ -557,17 +601,7 @@ export function buildMomentumSnapshot(
       .map((status) => ({ status, count: statusCounts.get(status) ?? 0 })),
   };
 
-  const sponsorTotal = scoped.reduce((sum, b) => sum + b.sponsors.length, 0);
-  const institutionalization: MomentumInstitutionalization = {
-    uniqueSponsors: uniqueSponsorCount(scoped),
-    avgSponsorsPerBill:
-      scoped.length === 0
-        ? 0
-        : Math.round((sponsorTotal / scoped.length) * 10) / 10,
-    enactedCount,
-    executionSignals:
-      EXECUTION_SIGNALS[scopeKey] ?? EXECUTION_SIGNALS.national,
-  };
+  const institutionalization = buildInstitutionalization(scoped);
 
   const aiTrendSummary = buildTrendSummary(
     scopeLabel,
@@ -595,9 +629,6 @@ export function buildMomentumSnapshot(
     },
   };
 
-  const innovation =
-    INNOVATION_NOTES[scopeKey] ?? INNOVATION_NOTES.national;
-
   return {
     scopeKey,
     scopeLabel,
@@ -605,6 +636,5 @@ export function buildMomentumSnapshot(
     breadth,
     progression,
     institutionalization,
-    innovation,
   };
 }

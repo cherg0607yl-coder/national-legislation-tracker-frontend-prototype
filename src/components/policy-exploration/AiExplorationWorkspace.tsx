@@ -9,6 +9,8 @@ import {
 } from "../../lib/policyExploration";
 import { UsStatesMap } from "./UsStatesMap";
 import { MomentumDimensions } from "./MomentumDimensions";
+import { NationalBillTimeline } from "./NationalBillTimeline";
+import { GapDimensions, GapDimensionsPrompt } from "./GapDimensions";
 
 interface AiExplorationWorkspaceProps {
   bills: Bill[];
@@ -41,6 +43,7 @@ export function AiExplorationWorkspace({
   const datasetBillCount = selectedState
     ? (billCounts[selectedState] ?? 0)
     : aiBills.length;
+  const isNationView = selectedState === null;
 
   function handleSelect(state: string) {
     setSelectedState((current) => (current === state ? null : state));
@@ -58,9 +61,9 @@ export function AiExplorationWorkspace({
             Artificial Intelligence momentum
           </h1>
           <p>
-            Nationwide metrics are shown by default. Select a state on the map
-            to inspect that state’s activity across the five research
-            dimensions.
+            Momentum metrics work for Nation or a selected state. The nationwide
+            bill-updates timeline appears in Nation view; gap analysis opens
+            when you select a state.
           </p>
         </div>
         <button
@@ -108,9 +111,9 @@ export function AiExplorationWorkspace({
         <p className="dataset-scope__eyebrow">Dataset in view</p>
         <h2 id="dataset-scope-heading">{datasetLabel}</h2>
         <p>
-          {selectedState
-            ? `Momentum metrics below reflect Artificial Intelligence bills tracked for ${datasetLabel}.`
-            : "No state selected — momentum metrics below reflect Artificial Intelligence bills nationwide (Nation data)."}
+          {isNationView
+            ? "Nation scope: Momentum metrics and the important-bill timeline. Select a state for gap analysis."
+            : `${datasetLabel} scope: Momentum metrics for this state, plus gap dimensions versus peers.`}
         </p>
         <div className="dataset-scope__meta">
           <span>
@@ -127,13 +130,24 @@ export function AiExplorationWorkspace({
             </button>
           ) : (
             <span className="dataset-scope__hint">
-              Click a state on the map to filter
+              Click a state on the map to open gaps
             </span>
           )}
         </div>
       </section>
 
+      {/* Momentum: scope-agnostic (Nation or state) */}
       <MomentumDimensions snapshot={snapshot} allAiBills={aiBills} />
+
+      {/* Timeline: Nation-only */}
+      {isNationView && <NationalBillTimeline />}
+
+      {/* Gap: state-scoped only */}
+      {selectedState ? (
+        <GapDimensions stateCode={selectedState} />
+      ) : (
+        <GapDimensionsPrompt />
+      )}
     </section>
   );
 }
