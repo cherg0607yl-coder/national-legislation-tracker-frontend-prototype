@@ -1213,6 +1213,22 @@
   font-style: italic;
 }
 
+.gap-coverage-panel {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.gap-coverage-panel__block {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.gap-coverage-panel__block h4 {
+  margin: 0;
+  font-size: 1.02rem;
+  color: var(--color-text-brand);
+}
+
 .gap-dimensions-prompt {
   display: grid;
   gap: 0.4rem;

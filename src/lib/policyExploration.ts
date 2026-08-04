@@ -277,6 +277,20 @@ export interface SessionBreadthSnapshot {
   mostActive: BreadthDomainRow | null;
 }
 
+export interface GapCoverageRow {
+  domain: string;
+  stateHasCoverage: boolean;
+  coveredStates: number;
+  coverageShare: number;
+}
+
+export interface GapCoverageSnapshot {
+  sessionId: string;
+  sessionLabel: string;
+  introducedGaps: GapCoverageRow[];
+  enactedGaps: GapCoverageRow[];
+}
+
 export interface MomentumBreadth {
   domainsCovered: number;
   totalDomains: number;
@@ -370,6 +384,71 @@ function clearedCommittee(bill: Bill): boolean {
 
 function clearedChamber(bill: Bill): boolean {
   return ["Passed", "Enacted"].includes(bill.status);
+}
+
+function gapCoverageForStatus(
+  aiBills: Bill[],
+  targetState: string,
+  sessionId: string,
+  statusMode: "introduced" | "enacted",
+): GapCoverageRow[] {
+  const sessionBills =
+    sessionId === "all" ? aiBills : filterBySession(aiBills, sessionId);
+  const eligibleBills =
+    statusMode === "enacted"
+      ? sessionBills.filter((bill) => bill.status === "Enacted")
+      : sessionBills;
+
+  const totalStates = ALL_STATES.length;
+  const rows = NCSL_AI_TAXONOMY.map((domain) => {
+    const coveredStates = ALL_STATES.reduce((count, state) => {
+      const hasDomain = eligibleBills.some(
+        (bill) => bill.state === state && bill.subcategory === domain,
+      );
+      return count + (hasDomain ? 1 : 0);
+    }, 0);
+
+    const stateHasCoverage = eligibleBills.some(
+      (bill) => bill.state === targetState && bill.subcategory === domain,
+    );
+
+    return {
+      domain,
+      stateHasCoverage,
+      coveredStates,
+      coverageShare:
+        totalStates === 0 ? 0 : Math.round((coveredStates / totalStates) * 100),
+    };
+  });
+
+  return rows
+    .filter((row) => !row.stateHasCoverage)
+    .sort(
+      (a, b) =>
+        a.coverageShare - b.coverageShare || a.domain.localeCompare(b.domain),
+    );
+}
+
+export function buildGapCoverageSnapshot(
+  aiBills: Bill[],
+  targetState: string,
+  sessionId: string,
+): GapCoverageSnapshot {
+  const session =
+    LEGISLATIVE_SESSIONS.find((item) => item.id === sessionId) ??
+    LEGISLATIVE_SESSIONS[0];
+
+  return {
+    sessionId: session.id,
+    sessionLabel: session.label,
+    introducedGaps: gapCoverageForStatus(
+      aiBills,
+      targetState,
+      sessionId,
+      "introduced",
+    ),
+    enactedGaps: gapCoverageForStatus(aiBills, targetState, sessionId, "enacted"),
+  };
 }
 
 function buildTrendSummary(

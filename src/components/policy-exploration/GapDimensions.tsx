@@ -1,14 +1,29 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import type { Bill } from "../../types/bill";
+import {
+  ACTIVITY_CHART_SESSIONS,
+  buildGapCoverageSnapshot,
+  getAiBills,
+} from "../../lib/policyExploration";
 import { STATE_NAMES } from "../../lib/stats";
+import { AccessibleBarChart } from "../policy-design/AccessibleBarChart";
+import "../../styles/components/AccessibleBarChart.css";
 
 interface GapShellProps {
   dim: string;
   titleId: string;
   title: string;
   description: string;
+  children?: React.ReactNode;
 }
 
-function GapShell({ dim, titleId, title, description }: GapShellProps) {
+function GapShell({
+  dim,
+  titleId,
+  title,
+  description,
+  children,
+}: GapShellProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -36,12 +51,103 @@ function GapShell({ dim, titleId, title, description }: GapShellProps) {
           role="region"
           aria-labelledby={titleId}
         >
-          <p className="gap-dimensions__placeholder">
-            Gap analysis for this dimension will appear here.
-          </p>
+          {children ?? (
+            <p className="gap-dimensions__placeholder">
+              Gap analysis for this dimension will appear here.
+            </p>
+          )}
         </div>
       )}
     </article>
+  );
+}
+
+function CoverageGapPanel({
+  bills,
+  stateCode,
+}: {
+  bills: Bill[];
+  stateCode: string;
+}) {
+  const [sessionId, setSessionId] = useState(
+    ACTIVITY_CHART_SESSIONS[0]?.id ?? "2025-2026",
+  );
+  const aiBills = useMemo(() => getAiBills(bills), [bills]);
+  const snapshot = useMemo(
+    () => buildGapCoverageSnapshot(aiBills, stateCode, sessionId),
+    [aiBills, stateCode, sessionId],
+  );
+
+  const introducedData = snapshot.introducedGaps.map((row) => ({
+    id: `introduced-${row.domain}`,
+    label: row.domain,
+    value: row.coverageShare,
+    note: `${row.coveredStates}/50 states`,
+  }));
+  const enactedData = snapshot.enactedGaps.map((row) => ({
+    id: `enacted-${row.domain}`,
+    label: row.domain,
+    value: row.coverageShare,
+    note: `${row.coveredStates}/50 states`,
+  }));
+
+  return (
+    <div className="gap-coverage-panel">
+      <div className="activity-panel__session-head">
+        <div>
+          <h4>Coverage gaps by NCSL domain</h4>
+          <p className="activity-panel__lead">
+            Missing domains in the selected state, ordered from lowest to highest
+            share of peer-state coverage in {snapshot.sessionLabel}.
+          </p>
+        </div>
+        <label className="activity-panel__session-select">
+          <span>Session</span>
+          <select
+            value={sessionId}
+            onChange={(event) => setSessionId(event.target.value)}
+          >
+            {ACTIVITY_CHART_SESSIONS.map((session) => (
+              <option key={session.id} value={session.id}>
+                {session.label}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <section className="gap-coverage-panel__block">
+        <h4>1. Introduced bills</h4>
+        <p className="activity-panel__lead">
+          Domains where this state has no introduced bill, annotated with the
+          percentage of states that do have coverage.
+        </p>
+        <AccessibleBarChart
+          title="Missing introduced-bill domains"
+          description="Ascending by percentage of states covering the domain."
+          data={introducedData}
+          unit="% of states"
+          preserveOrder
+          emptyMessage="This state has introduced-bill coverage across all 25 NCSL domains in this session."
+        />
+      </section>
+
+      <section className="gap-coverage-panel__block">
+        <h4>2. Enacted bills</h4>
+        <p className="activity-panel__lead">
+          Domains where this state lacks enacted coverage, annotated with the
+          percentage of states that have enacted a bill in that domain.
+        </p>
+        <AccessibleBarChart
+          title="Missing enacted-bill domains"
+          description="Ascending by percentage of states with enacted-domain coverage."
+          data={enactedData}
+          unit="% of states"
+          preserveOrder
+          emptyMessage="This state has enacted-domain coverage across all 25 NCSL domains in this session."
+        />
+      </section>
+    </div>
   );
 }
 
@@ -78,10 +184,11 @@ const GAP_DIMENSIONS = [
 
 interface GapDimensionsProps {
   stateCode: string;
+  bills: Bill[];
 }
 
 /** State-scoped only — compare this jurisdiction against peers. */
-export function GapDimensions({ stateCode }: GapDimensionsProps) {
+export function GapDimensions({ stateCode, bills }: GapDimensionsProps) {
   const stateName = STATE_NAMES[stateCode] ?? stateCode;
 
   return (
@@ -100,7 +207,11 @@ export function GapDimensions({ stateCode }: GapDimensionsProps) {
       </div>
 
       {GAP_DIMENSIONS.map((item) => (
-        <GapShell key={item.titleId} {...item} />
+        <GapShell key={item.titleId} {...item}>
+          {item.titleId === "gap-coverage-heading" ? (
+            <CoverageGapPanel bills={bills} stateCode={stateCode} />
+          ) : undefined}
+        </GapShell>
       ))}
     </div>
   );

@@ -144,7 +144,7 @@ export function AiExplorationWorkspace({
 
       {/* Gap: state-scoped only */}
       {selectedState ? (
-        <GapDimensions stateCode={selectedState} />
+        <GapDimensions stateCode={selectedState} bills={bills} />
       ) : (
         <GapDimensionsPrompt />
       )}
