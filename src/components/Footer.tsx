@@ -14,6 +14,8 @@ export function Footer() {
         <nav className="site-footer__links" aria-label="Footer">
           <Link to="/">Home</Link>
           <Link to="/search">Search Bills</Link>
+          <Link to="/policy-exploration">Policy Exploration</Link>
+          <Link to="/policy-design">Policy Design</Link>
           <Link to="/about">About</Link>
         </nav>
       </div>

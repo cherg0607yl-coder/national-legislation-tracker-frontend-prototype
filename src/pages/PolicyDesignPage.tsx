@@ -1,1 +1,2 @@
-export { PolicyExplorationPage, PolicyDesignPage } from "./PolicyExplorationPage";
+/** @deprecated Prefer importing NcPolicyDesignPage directly. */
+export { NcPolicyDesignPage as PolicyDesignPage } from "./NcPolicyDesignPage";
