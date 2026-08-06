@@ -9,7 +9,6 @@ import {
   NC_GAP_FINDINGS,
   NC_LANDSCAPE_SUMMARY,
   NC_POLICY_DESIGN_META,
-  NC_SUPPORTING_COMPARISON_BILL_IDS,
 } from "../data/ncPolicyDesign";
 import {
   getAiBills,
@@ -17,18 +16,25 @@ import {
 } from "../lib/policyExploration";
 import {
   loadPolicyBrief,
-  toggleBill,
   toggleFinding,
   toggleGap,
   toggleSubstance,
 } from "../lib/policyBrief";
 import { AnalysisTrustBadges } from "../components/policy-design/AnalysisTrustBadges";
 import { CompactNationalMomentum } from "../components/policy-design/CompactNationalMomentum";
-import { BillSubstanceCard } from "../components/policy-design/BillSubstanceCard";
+import {
+  BillSubstanceCard,
+  BillSubstanceCompareTable,
+} from "../components/policy-design/BillSubstanceCard";
 import { DistinctivenessCard } from "../components/policy-design/DistinctivenessCard";
 import { GapFindingCard } from "../components/policy-design/GapFindingCard";
-import { ReferenceBillCard } from "../components/policy-design/ReferenceBillCard";
+import { ReferenceBillPicker } from "../components/policy-design/ReferenceBillPicker";
 import { PolicyBriefTray } from "../components/policy-design/PolicyBriefTray";
+import { PrintablePolicyBrief } from "../components/policy-design/PrintablePolicyBrief";
+import {
+  DisclosureSection,
+  ExpandCollapseControls,
+} from "../components/policy-design/DisclosureSection";
 import { AccessibleDonutChart } from "../components/policy-design/AccessibleDonutChart";
 import { AccessibleBarChart } from "../components/policy-design/AccessibleBarChart";
 import "../styles/components/AccessibleBarChart.css";
@@ -37,8 +43,30 @@ import "../styles/pages/NcPolicyDesignPage.css";
 
 const data = mockData as MockBillsData;
 
+type SectionKey =
+  | "national"
+  | "landscape"
+  | "emphasizes"
+  | "gaps"
+  | "evidence";
+
+const DEFAULT_OPEN: Record<SectionKey, boolean> = {
+  national: false,
+  landscape: true,
+  emphasizes: true,
+  gaps: true,
+  evidence: false,
+};
+
 export function NcPolicyDesignPage() {
   const [brief, setBrief] = useState<PolicyBriefState>(() => loadPolicyBrief());
+  const [sectionOpen, setSectionOpen] =
+    useState<Record<SectionKey, boolean>>(DEFAULT_OPEN);
+  const [substanceOpen, setSubstanceOpen] = useState<Record<string, boolean>>(
+    {},
+  );
+  const [compareMode, setCompareMode] = useState(false);
+  const [briefDetailsOpen, setBriefDetailsOpen] = useState(false);
 
   const billsById = useMemo(() => {
     const map = new Map<string, Bill>();
@@ -85,13 +113,27 @@ export function NcPolicyDesignPage() {
       }));
   }, [ncAiBills]);
 
-  const featuredNcBills = NC_LANDSCAPE_SUMMARY.featuredBillIds
-    .map((id) => billsById.get(id))
-    .filter((bill): bill is Bill => Boolean(bill));
-
-  const comparisonBills = NC_SUPPORTING_COMPARISON_BILL_IDS.map((id) =>
-    billsById.get(id),
-  ).filter((bill): bill is Bill => Boolean(bill));
+  const compareRows = useMemo(() => {
+    const source =
+      brief.substanceBillIds.length > 0
+        ? NC_BILL_SUBSTANCE.filter((substance) =>
+            brief.substanceBillIds.includes(substance.billId),
+          )
+        : NC_BILL_SUBSTANCE;
+    return source
+      .map((substance) => {
+        const bill = billsById.get(substance.billId);
+        return bill ? { bill, substance } : null;
+      })
+      .filter(
+        (
+          row,
+        ): row is {
+          bill: Bill;
+          substance: (typeof NC_BILL_SUBSTANCE)[number];
+        } => Boolean(row),
+      );
+  }, [brief.substanceBillIds, billsById]);
 
   useEffect(() => {
     document.title = `${NC_POLICY_DESIGN_META.pageTitle} · National Legislation Tracker`;
@@ -100,265 +142,354 @@ export function NcPolicyDesignPage() {
     };
   }, []);
 
+  function setSection(key: SectionKey, open: boolean) {
+    setSectionOpen((current) => ({ ...current, [key]: open }));
+  }
+
+  function expandAllSections() {
+    setSectionOpen({
+      national: true,
+      landscape: true,
+      emphasizes: true,
+      gaps: true,
+      evidence: true,
+    });
+    setBriefDetailsOpen(true);
+  }
+
+  function collapseAllSections() {
+    setSectionOpen({
+      national: false,
+      landscape: false,
+      emphasizes: false,
+      gaps: false,
+      evidence: false,
+    });
+    setBriefDetailsOpen(false);
+    setSubstanceOpen({});
+  }
+
+  function expandAllSubstance() {
+    const next: Record<string, boolean> = {};
+    for (const substance of NC_BILL_SUBSTANCE) {
+      next[substance.billId] = true;
+    }
+    setSubstanceOpen(next);
+  }
+
+  function collapseAllSubstance() {
+    setSubstanceOpen({});
+  }
+
+  function addBillsToBrief(billIds: string[]) {
+    setBrief((current) => ({
+      ...current,
+      billIds: [...new Set([...current.billIds, ...billIds])],
+    }));
+  }
+
   return (
     <div className="nc-design">
-      <header className="nc-design__intro section">
-        <div className="container">
-          <p className="nc-design__eyebrow">Policy Design · North Carolina</p>
-          <h1>{NC_POLICY_DESIGN_META.pageTitle}</h1>
-          <p className="nc-design__lede">
-            A legislator-facing briefing workspace that connects national AI
-            legislative activity, North Carolina’s tracked landscape, curated
-            emphasis areas, corpus-relative policy gaps, supporting bills, and
-            a lightweight local brief tray.
-          </p>
-
-          <aside className="nc-design__disclaimer" role="note">
-            <p>
-              <strong>Prototype disclaimer.</strong>{" "}
-              {NC_POLICY_DESIGN_META.disclaimer}
+      <div className="nc-design__screen">
+        <header className="nc-design__intro section">
+          <div className="container">
+            <p className="nc-design__eyebrow">Policy Design · North Carolina</p>
+            <h1>{NC_POLICY_DESIGN_META.pageTitle}</h1>
+            <p className="nc-design__lede">
+              A legislator-facing briefing workspace that connects national AI
+              legislative activity, North Carolina’s tracked landscape, curated
+              emphasis areas, corpus-relative policy gaps, supporting bills, and
+              a lightweight local brief tray.
             </p>
-            <p>
-              <strong>Draft analysis — pending team review.</strong> Provenance
-              labels, bill-substance summaries, distinctiveness findings, gap
-              definitions, and supporting-bill mappings are provisional fixtures
-              editable in{" "}
-              <code>src/data/ncPolicyDesign.ts</code>.
-            </p>
-          </aside>
 
-          <div className="btn-row">
-            <Link to="/policy-exploration" className="btn btn--secondary">
-              Open Policy Exploration
-            </Link>
-            <Link
-              to="/search?category=Artificial%20Intelligence&state=NC"
-              className="btn btn--secondary"
-            >
-              Search NC AI bills
-            </Link>
-            <a href="#policy-brief" className="btn btn--primary">
-              Jump to policy brief
-            </a>
-          </div>
-        </div>
-      </header>
-
-      <div className="nc-design__layout container">
-        <div className="nc-design__main">
-          <section
-            className="nc-design__section"
-            aria-labelledby="national-activity-heading"
-          >
-            <div className="section-heading">
-              <h2 id="national-activity-heading">
-                National AI legislative activity
-              </h2>
+            <aside className="nc-design__disclaimer" role="note">
               <p>
-                Momentum is shown as separate dimensions — volume, progression,
-                recent activity, and institutionalization. These measure
-                legislative activity in the mock corpus, not policy quality.
+                <strong>Prototype disclaimer.</strong>{" "}
+                {NC_POLICY_DESIGN_META.disclaimer}
               </p>
-            </div>
-            <CompactNationalMomentum bills={data.bills} />
-          </section>
-
-          <section
-            className="nc-design__section"
-            aria-labelledby="nc-landscape-heading"
-          >
-            <div className="section-heading">
-              <h2 id="nc-landscape-heading">North Carolina AI landscape</h2>
               <p>
-                Scoped to North Carolina AI bills in the prototype dataset (
-                {ncAiBills.length} bills).
+                <strong>Draft analysis — pending team review.</strong>{" "}
+                Provenance labels, bill-substance summaries, distinctiveness
+                findings, gap definitions, and supporting-bill mappings are
+                provisional fixtures editable in{" "}
+                <code>src/data/ncPolicyDesign.ts</code>.
               </p>
-            </div>
+            </aside>
 
-            <article className="nc-landscape-summary">
-              <h3>{NC_LANDSCAPE_SUMMARY.headline}</h3>
-              <AnalysisTrustBadges
-                provenance={NC_LANDSCAPE_SUMMARY.provenance}
-                reviewStatus={NC_LANDSCAPE_SUMMARY.reviewStatus}
+            <div className="nc-design__intro-controls">
+              <div className="btn-row">
+                <Link to="/policy-exploration" className="btn btn--secondary">
+                  Open Policy Exploration
+                </Link>
+                <Link
+                  to="/search?category=Artificial%20Intelligence&state=NC"
+                  className="btn btn--secondary"
+                >
+                  Search NC AI bills
+                </Link>
+                <a href="#policy-brief" className="btn btn--primary">
+                  Jump to policy brief
+                </a>
+              </div>
+              <ExpandCollapseControls
+                onExpandAll={expandAllSections}
+                onCollapseAll={collapseAllSections}
+                label="Page section visibility"
               />
-              <p>{NC_LANDSCAPE_SUMMARY.summary}</p>
-              <p className="nc-landscape-summary__label" role="note">
-                Draft project analysis — pending team review
-              </p>
-            </article>
-
-            <div className="nc-landscape-metrics">
-              <div className="nc-momentum__stats" role="list">
-                <div role="listitem">
-                  <span className="nc-momentum__stat-value">
-                    {ncAiBills.length}
-                  </span>
-                  <span className="nc-momentum__stat-label">
-                    NC AI bills tracked
-                  </span>
-                </div>
-                <div role="listitem">
-                  <span className="nc-momentum__stat-value">
-                    {ncSnapshot.activity.introducedLast30}
-                  </span>
-                  <span className="nc-momentum__stat-label">
-                    Introduced · last 30 days
-                  </span>
-                </div>
-                <div role="listitem">
-                  <span className="nc-momentum__stat-value">
-                    {ncSnapshot.progression.enacted}
-                  </span>
-                  <span className="nc-momentum__stat-label">Enacted</span>
-                </div>
-              </div>
-
-              <div className="nc-landscape-charts">
-                <AccessibleDonutChart
-                  title="NC status distribution"
-                  description="Mutually exclusive statuses for North Carolina AI bills."
-                  data={statusDonut}
-                  unit="bills"
-                  centerValue={String(ncAiBills.length)}
-                  centerLabel="bills"
-                />
-                <AccessibleBarChart
-                  title="Top AI domains in NC corpus"
-                  description="Most frequent NCSL-style domain tags among North Carolina AI bills."
-                  data={topDomains}
-                  unit="bills"
-                />
-              </div>
             </div>
+          </div>
+        </header>
 
-            <div className="nc-featured-bills">
-              <h3>Selected North Carolina bills</h3>
-              <div className="nc-featured-bills__grid">
-                {featuredNcBills.map((bill) => (
-                  <ReferenceBillCard
-                    key={bill.id}
-                    bill={bill}
-                    inBrief={brief.billIds.includes(bill.id)}
-                    onToggleBrief={() => setBrief(toggleBill(brief, bill.id))}
+        <div className="nc-design__layout container">
+          <div className="nc-design__main">
+            <DisclosureSection
+              title="National AI legislative activity"
+              summary="Momentum dimensions measure legislative activity in the mock corpus, not policy quality."
+              open={sectionOpen.national}
+              onToggle={() => setSection("national", !sectionOpen.national)}
+              badge="Collapsed by default"
+            >
+              <CompactNationalMomentum bills={data.bills} />
+            </DisclosureSection>
+
+            <DisclosureSection
+              title="North Carolina AI landscape"
+              summary={`Scoped to ${ncAiBills.length} North Carolina AI bills in the prototype dataset.`}
+              open={sectionOpen.landscape}
+              onToggle={() => setSection("landscape", !sectionOpen.landscape)}
+              badge="Expanded by default"
+            >
+              <article className="nc-landscape-summary">
+                <h3>{NC_LANDSCAPE_SUMMARY.headline}</h3>
+                <AnalysisTrustBadges
+                  provenance={NC_LANDSCAPE_SUMMARY.provenance}
+                  reviewStatus={NC_LANDSCAPE_SUMMARY.reviewStatus}
+                />
+                <p>{NC_LANDSCAPE_SUMMARY.summary}</p>
+                <p className="nc-landscape-summary__label" role="note">
+                  Draft project analysis — pending team review
+                </p>
+              </article>
+
+              <div className="nc-landscape-metrics">
+                <div className="nc-momentum__stats" role="list">
+                  <div role="listitem">
+                    <span className="nc-momentum__stat-value">
+                      {ncAiBills.length}
+                    </span>
+                    <span className="nc-momentum__stat-label">
+                      NC AI bills tracked
+                    </span>
+                  </div>
+                  <div role="listitem">
+                    <span className="nc-momentum__stat-value">
+                      {ncSnapshot.activity.introducedLast30}
+                    </span>
+                    <span className="nc-momentum__stat-label">
+                      Introduced · last 30 days
+                    </span>
+                  </div>
+                  <div role="listitem">
+                    <span className="nc-momentum__stat-value">
+                      {ncSnapshot.progression.enacted}
+                    </span>
+                    <span className="nc-momentum__stat-label">Enacted</span>
+                  </div>
+                </div>
+
+                <div className="nc-landscape-charts">
+                  <AccessibleDonutChart
+                    title="NC status distribution"
+                    description="Mutually exclusive statuses for North Carolina AI bills."
+                    data={statusDonut}
+                    unit="bills"
+                    centerValue={String(ncAiBills.length)}
+                    centerLabel="bills"
+                  />
+                  <AccessibleBarChart
+                    title="Top AI domains in NC corpus"
+                    description="Most frequent NCSL-style domain tags among North Carolina AI bills."
+                    data={topDomains}
+                    unit="bills"
+                  />
+                </div>
+              </div>
+            </DisclosureSection>
+
+            <DisclosureSection
+              title="What North Carolina emphasizes"
+              summary="Curated distinctiveness findings — expand each card for supporting evidence."
+              open={sectionOpen.emphasizes}
+              onToggle={() =>
+                setSection("emphasizes", !sectionOpen.emphasizes)
+              }
+              badge={`${NC_DISTINCTIVENESS_FINDINGS.length} findings`}
+            >
+              <div className="finding-grid">
+                {NC_DISTINCTIVENESS_FINDINGS.map((finding) => (
+                  <DistinctivenessCard
+                    key={finding.id}
+                    finding={finding}
+                    billsById={billsById}
+                    inBrief={brief.findingIds.includes(finding.id)}
+                    onToggleBrief={() =>
+                      setBrief(toggleFinding(brief, finding.id))
+                    }
                   />
                 ))}
               </div>
-            </div>
-          </section>
+            </DisclosureSection>
 
-          <section
-            className="nc-design__section"
-            aria-labelledby="substance-heading"
-          >
-            <div className="section-heading">
-              <h2 id="substance-heading">Structured bill substance</h2>
-              <p>
-                Six-field substance model for selected NC bills. Core fields are
-                expected; conditional fields appear only when identified in the
-                available bill text.
-              </p>
-            </div>
-            <div className="substance-grid">
-              {NC_BILL_SUBSTANCE.map((substance) => {
-                const bill = billsById.get(substance.billId);
-                if (!bill) return null;
-                return (
-                  <BillSubstanceCard
-                    key={substance.billId}
-                    bill={bill}
-                    substance={substance}
-                    inBrief={brief.substanceBillIds.includes(substance.billId)}
-                    onToggleBrief={() =>
-                      setBrief(toggleSubstance(brief, substance.billId))
-                    }
+            <DisclosureSection
+              title="Potential policy gaps"
+              summary="Gaps mean a component was not identified in the current corpus — not that North Carolina has no policy."
+              open={sectionOpen.gaps}
+              onToggle={() => setSection("gaps", !sectionOpen.gaps)}
+              badge={`${NC_GAP_FINDINGS.length} gaps`}
+            >
+              <div className="gap-grid">
+                {NC_GAP_FINDINGS.map((gap) => (
+                  <GapFindingCard
+                    key={gap.id}
+                    gap={gap}
+                    billsById={billsById}
+                    inBrief={brief.gapIds.includes(gap.id)}
+                    onToggleBrief={() => setBrief(toggleGap(brief, gap.id))}
                   />
-                );
-              })}
-            </div>
-          </section>
+                ))}
+              </div>
+            </DisclosureSection>
 
-          <section
-            className="nc-design__section"
-            aria-labelledby="emphasizes-heading"
-          >
-            <div className="section-heading">
-              <h2 id="emphasizes-heading">What North Carolina emphasizes</h2>
-              <p>
-                Curated distinctiveness findings from typed fixtures — not
-                inferred automatically.
-              </p>
-            </div>
-            <div className="finding-grid">
-              {NC_DISTINCTIVENESS_FINDINGS.map((finding) => (
-                <DistinctivenessCard
-                  key={finding.id}
-                  finding={finding}
+            <DisclosureSection
+              title="Supporting evidence and bills"
+              summary="Choose reference bills, review bill substance (collapsed by default), and optionally compare fields."
+              open={sectionOpen.evidence}
+              onToggle={() => setSection("evidence", !sectionOpen.evidence)}
+              badge="Collapsed by default"
+            >
+              <ReferenceBillPicker
+                billsById={billsById}
+                selectedBillIds={brief.billIds}
+                onAddSelected={addBillsToBrief}
+                defaultOpen={false}
+              />
+
+              <div className="substance-panel">
+                <div className="substance-panel__head">
+                  <div>
+                    <h3>Structured bill substance</h3>
+                    <p>
+                      Six-field model for selected NC bills. Headers show
+                      field-completeness; expand a bill to read the fields.
+                    </p>
+                  </div>
+                  <ExpandCollapseControls
+                    onExpandAll={expandAllSubstance}
+                    onCollapseAll={collapseAllSubstance}
+                    label="Bill substance visibility"
+                  />
+                </div>
+
+                <div className="substance-panel__mode" role="group" aria-label="Substance view mode">
+                  <button
+                    type="button"
+                    className={
+                      !compareMode
+                        ? "nc-momentum__tab is-active"
+                        : "nc-momentum__tab"
+                    }
+                    aria-pressed={!compareMode}
+                    onClick={() => setCompareMode(false)}
+                  >
+                    Accordion list
+                  </button>
+                  <button
+                    type="button"
+                    className={
+                      compareMode
+                        ? "nc-momentum__tab is-active"
+                        : "nc-momentum__tab"
+                    }
+                    aria-pressed={compareMode}
+                    onClick={() => setCompareMode(true)}
+                  >
+                    Comparison table
+                  </button>
+                </div>
+
+                {compareMode ? (
+                  <BillSubstanceCompareTable rows={compareRows} />
+                ) : (
+                  <div className="substance-grid">
+                    {NC_BILL_SUBSTANCE.map((substance) => {
+                      const bill = billsById.get(substance.billId);
+                      if (!bill) return null;
+                      return (
+                        <BillSubstanceCard
+                          key={substance.billId}
+                          bill={bill}
+                          substance={substance}
+                          inBrief={brief.substanceBillIds.includes(
+                            substance.billId,
+                          )}
+                          onToggleBrief={() =>
+                            setBrief(toggleSubstance(brief, substance.billId))
+                          }
+                          open={Boolean(substanceOpen[substance.billId])}
+                          onOpenChange={(next) =>
+                            setSubstanceOpen((current) => ({
+                              ...current,
+                              [substance.billId]: next,
+                            }))
+                          }
+                        />
+                      );
+                    })}
+                  </div>
+                )}
+                {compareMode ? (
+                  <p className="substance-compare__hint" role="note">
+                    {brief.substanceBillIds.length > 0
+                      ? "Showing substance notes currently in the brief."
+                      : "No substance notes in the brief yet — showing all curated NC substance records for comparison."}
+                  </p>
+                ) : null}
+              </div>
+            </DisclosureSection>
+
+            <section
+              className="disclosure-section brief-section is-open"
+              aria-labelledby="policy-brief-workspace-heading"
+            >
+              <header className="disclosure-section__header">
+                <div className="disclosure-section__titles">
+                  <h2
+                    id="policy-brief-workspace-heading"
+                    className="disclosure-section__title"
+                  >
+                    Policy brief workspace
+                  </h2>
+                  <p className="disclosure-section__summary">
+                    Compact count summary stays visible. Expand details to edit.
+                    Print outputs a dedicated brief document, not this page.
+                  </p>
+                </div>
+              </header>
+              <div className="disclosure-section__panel">
+                <PolicyBriefTray
+                  brief={brief}
+                  onChange={setBrief}
                   billsById={billsById}
-                  inBrief={brief.findingIds.includes(finding.id)}
-                  onToggleBrief={() =>
-                    setBrief(toggleFinding(brief, finding.id))
-                  }
+                  detailsOpen={briefDetailsOpen}
+                  onDetailsOpenChange={setBriefDetailsOpen}
                 />
-              ))}
-            </div>
-          </section>
-
-          <section
-            className="nc-design__section"
-            aria-labelledby="gaps-heading"
-          >
-            <div className="section-heading">
-              <h2 id="gaps-heading">Potential policy gaps</h2>
-              <p>
-                Gaps mean a policy component or domain found in comparison
-                legislation was{" "}
-                <strong>not identified in the current corpus</strong> for North
-                Carolina — not that North Carolina definitively has no policy.
-              </p>
-            </div>
-            <div className="gap-grid">
-              {NC_GAP_FINDINGS.map((gap) => (
-                <GapFindingCard
-                  key={gap.id}
-                  gap={gap}
-                  billsById={billsById}
-                  inBrief={brief.gapIds.includes(gap.id)}
-                  onToggleBrief={() => setBrief(toggleGap(brief, gap.id))}
-                />
-              ))}
-            </div>
-          </section>
-
-          <section
-            className="nc-design__section"
-            aria-labelledby="supporting-heading"
-          >
-            <div className="section-heading">
-              <h2 id="supporting-heading">Supporting comparison bills</h2>
-              <p>
-                Peer-state bills cited by gap and distinctiveness fixtures.
-                Official source links are fictional prototype URLs.
-              </p>
-            </div>
-            <div className="nc-featured-bills__grid">
-              {comparisonBills.map((bill) => (
-                <ReferenceBillCard
-                  key={bill.id}
-                  bill={bill}
-                  inBrief={brief.billIds.includes(bill.id)}
-                  onToggleBrief={() => setBrief(toggleBill(brief, bill.id))}
-                />
-              ))}
-            </div>
-          </section>
+              </div>
+            </section>
+          </div>
         </div>
-
-        <PolicyBriefTray
-          brief={brief}
-          onChange={setBrief}
-          billsById={billsById}
-        />
       </div>
+
+      <PrintablePolicyBrief brief={brief} billsById={billsById} />
     </div>
   );
 }

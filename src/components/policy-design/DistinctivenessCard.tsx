@@ -1,3 +1,4 @@
+import { useId, useState } from "react";
 import { Link } from "react-router-dom";
 import type { Bill } from "../../types/bill";
 import type { DistinctivenessFinding } from "../../types/policyDesign";
@@ -52,35 +53,57 @@ export function DistinctivenessCard({
   inBrief,
   onToggleBrief,
 }: DistinctivenessCardProps) {
+  const [evidenceOpen, setEvidenceOpen] = useState(false);
+  const reactId = useId();
+  const titleId = `finding-${finding.id}-title`;
+  const panelId = `${reactId}-evidence`;
+
   return (
-    <article
-      className="finding-card"
-      aria-labelledby={`finding-${finding.id}-title`}
-    >
-      <h3 id={`finding-${finding.id}-title`}>{finding.title}</h3>
+    <article className="finding-card" aria-labelledby={titleId}>
+      <h3 id={titleId}>{finding.title}</h3>
       <AnalysisTrustBadges
         provenance={finding.provenance}
         reviewStatus={finding.reviewStatus}
       />
       <p>{finding.summary}</p>
-      <p className="finding-card__context">
-        <strong>Comparison context:</strong> {finding.comparisonContext}
-      </p>
-      <BillChipList
-        ids={finding.supportingNcBillIds}
-        billsById={billsById}
-        label="Supporting North Carolina bills"
-      />
-      <BillChipList
-        ids={finding.supportingPeerBillIds ?? []}
-        billsById={billsById}
-        label="Supporting peer-state bills"
-      />
-      <div className="btn-row">
+
+      <div className="btn-row finding-card__actions no-print">
+        <button
+          type="button"
+          className="btn btn--secondary"
+          aria-expanded={evidenceOpen}
+          aria-controls={panelId}
+          onClick={() => setEvidenceOpen((value) => !value)}
+        >
+          {evidenceOpen ? "Hide supporting evidence" : "Show supporting evidence"}
+        </button>
         <button type="button" className="btn btn--primary" onClick={onToggleBrief}>
           {inBrief ? "Remove finding from brief" : "Add finding to brief"}
         </button>
       </div>
+
+      {evidenceOpen ? (
+        <div
+          id={panelId}
+          className="finding-card__evidence"
+          role="region"
+          aria-label={`Supporting evidence for ${finding.title}`}
+        >
+          <p className="finding-card__context">
+            <strong>Comparison context:</strong> {finding.comparisonContext}
+          </p>
+          <BillChipList
+            ids={finding.supportingNcBillIds}
+            billsById={billsById}
+            label="Supporting North Carolina bills"
+          />
+          <BillChipList
+            ids={finding.supportingPeerBillIds ?? []}
+            billsById={billsById}
+            label="Supporting peer-state bills"
+          />
+        </div>
+      ) : null}
     </article>
   );
 }

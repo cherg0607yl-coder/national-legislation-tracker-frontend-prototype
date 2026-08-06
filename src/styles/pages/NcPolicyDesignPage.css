@@ -1,7 +1,7 @@
 /* North Carolina AI Policy Design page */
 
 .nc-design__intro {
-  padding-bottom: 2rem;
+  padding-bottom: 1.5rem;
 }
 
 .nc-design__eyebrow,
@@ -32,7 +32,7 @@
   display: grid;
   gap: 0.75rem;
   max-width: 46rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   padding: 1rem 1.15rem;
   border: 1px solid var(--color-border-default);
   border-left: 4px solid var(--color-bg-accent);
@@ -49,23 +49,121 @@
   font-size: 0.85em;
 }
 
-.nc-design__layout {
+.nc-design__intro-controls {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(16rem, 20rem);
-  gap: clamp(1.5rem, 4vw, 2.5rem);
-  align-items: start;
+  gap: 0.85rem;
+}
+
+.nc-design__layout {
+  display: block;
   padding-bottom: clamp(3rem, 6vw, 5rem);
 }
 
 .nc-design__main {
   display: grid;
-  gap: clamp(2.5rem, 5vw, 4rem);
+  gap: 1rem;
   min-width: 0;
+  max-width: 52rem;
 }
 
-.nc-design__section {
+/* Expand / collapse controls */
+.expand-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* Disclosure sections */
+.disclosure-section {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-surface);
+  overflow: clip;
+}
+
+.disclosure-section__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding: 1rem 1.15rem;
+}
+
+.disclosure-section.is-open > .disclosure-section__header {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.disclosure-section__titles {
+  flex: 1;
+  min-width: 12rem;
   display: grid;
-  gap: 1.25rem;
+  gap: 0.35rem;
+}
+
+.disclosure-section__title {
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  line-height: 1.25;
+}
+
+.disclosure-section__summary {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+.disclosure-section__aside {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.disclosure-section__badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.45rem;
+}
+
+.disclosure-section__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 40px;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-page);
+  color: var(--color-text-brand);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.disclosure-section__toggle:hover {
+  border-color: var(--color-border-accent);
+  background: var(--color-bg-accent-subtle);
+}
+
+.disclosure-section__toggle:focus-visible {
+  outline: 2px solid var(--color-text-brand);
+  outline-offset: 2px;
+}
+
+.disclosure-section__panel {
+  display: grid;
+  gap: 1.15rem;
+  padding: 1.15rem;
 }
 
 /* Trust badges */
@@ -74,7 +172,7 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   list-style: none;
-  margin: 0.75rem 0 1rem;
+  margin: 0.5rem 0 0.85rem;
   padding: 0;
 }
 
@@ -165,7 +263,7 @@
   padding: 1.15rem;
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-lg);
-  background: var(--color-bg-surface);
+  background: var(--color-bg-page);
 }
 
 .nc-momentum__panel h3 {
@@ -228,7 +326,7 @@
   padding: 1.15rem 1.25rem;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border-subtle);
-  background: var(--color-bg-surface);
+  background: var(--color-bg-page);
 }
 
 .nc-landscape-summary h3 {
@@ -254,83 +352,158 @@
   gap: 1rem;
 }
 
-.nc-featured-bills h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.85rem;
-}
-
-.nc-featured-bills__grid,
 .finding-grid,
 .gap-grid,
 .substance-grid {
   display: grid;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
-/* Reference bill cards */
-.ref-bill-card {
-  display: grid;
-  gap: 0.65rem;
-  padding: 1rem 1.1rem;
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-lg);
-  background: var(--color-bg-surface);
+/* Bill picker */
+.bill-picker__toolbar {
+  margin-bottom: 0.35rem;
 }
 
-.ref-bill-card__top {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.75rem;
-  align-items: flex-start;
-}
-
-.ref-bill-card__ids {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.85rem;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-}
-
-.ref-bill-card h3 {
-  font-size: 1.05rem;
-  line-height: 1.3;
-}
-
-.ref-bill-card h3 a:hover {
+.bill-picker__status {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
   color: var(--color-bg-accent);
 }
 
-.ref-bill-card h3 a:focus-visible {
-  outline: 2px solid var(--color-text-brand);
-  outline-offset: 2px;
+.bill-picker__groups {
+  display: grid;
+  gap: 1rem;
 }
 
-.ref-bill-card > p {
-  color: var(--color-text-secondary);
-  font-size: 0.95rem;
+.bill-picker__group {
+  margin: 0;
+  padding: 0.85rem;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-page);
 }
 
-.ref-bill-card__tags {
+.bill-picker__legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  width: 100%;
+  padding: 0 0 0.65rem;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-text-brand);
 }
 
-.ref-bill-card__actions {
-  margin-top: 0.25rem;
+.bill-picker__count {
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.bill-picker__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.bill-picker__row {
+  margin: 0;
+}
+
+.bill-picker__label {
+  display: grid;
+  grid-template-columns: auto minmax(7rem, max-content) minmax(0, 1fr) auto auto;
+  gap: 0.45rem 0.65rem;
+  align-items: center;
+  padding: 0.45rem 0.55rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.88rem;
+}
+
+.bill-picker__label:hover {
+  background: var(--color-bg-accent-subtle);
+}
+
+.bill-picker__label:has(input:focus-visible) {
+  outline: 2px solid var(--color-text-brand);
+  outline-offset: 1px;
+}
+
+.bill-picker__id {
+  font-weight: 600;
+  color: var(--color-text-brand);
+  white-space: nowrap;
+}
+
+.bill-picker__title {
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bill-picker__in-brief {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-bg-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 /* Substance */
-.substance-card,
-.finding-card,
-.gap-card {
+.substance-panel {
   display: grid;
   gap: 0.85rem;
-  padding: 1.15rem 1.25rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.substance-panel__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  align-items: flex-start;
+}
+
+.substance-panel__head h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+}
+
+.substance-panel__head p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.92rem;
+  max-width: 36rem;
+}
+
+.substance-panel__mode {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.substance-card {
+  display: grid;
+  gap: 0;
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-lg);
-  background: var(--color-bg-surface);
+  background: var(--color-bg-page);
+}
+
+.substance-card__header--accordion {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.9rem 1rem;
 }
 
 .substance-card__eyebrow {
@@ -339,11 +512,24 @@
   color: var(--color-text-muted);
 }
 
-.substance-card__header h3,
-.finding-card h3,
-.gap-card h3 {
-  font-size: 1.15rem;
+.substance-card__titles h3 {
+  margin: 0.2rem 0 0.35rem;
+  font-size: 1.05rem;
   line-height: 1.3;
+}
+
+.substance-card__completeness {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+}
+
+.substance-card__body {
+  display: grid;
+  gap: 0.85rem;
+  padding: 0 1rem 1rem;
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: 0.85rem;
 }
 
 .substance-card__group h4 {
@@ -370,7 +556,7 @@
   padding: 0.75rem 0.85rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border-subtle);
-  background: var(--color-bg-surface-muted);
+  background: var(--color-bg-surface);
 }
 
 .substance-field--core {
@@ -419,11 +605,69 @@
   color: var(--color-text-muted);
 }
 
+.substance-compare__scroll {
+  overflow-x: auto;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.substance-compare__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 36rem;
+}
+
+.substance-compare__table th,
+.substance-compare__table td {
+  border: 1px solid var(--color-border-subtle);
+  padding: 0.55rem 0.65rem;
+  vertical-align: top;
+  text-align: left;
+}
+
+.substance-compare__table th {
+  background: var(--color-bg-surface-muted);
+  color: var(--color-text-brand);
+  font-weight: 600;
+}
+
+.substance-compare__hint {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+}
+
 /* Findings / gaps */
+.finding-card,
+.gap-card {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-page);
+}
+
+.finding-card h3,
+.gap-card h3 {
+  font-size: 1.1rem;
+  line-height: 1.3;
+  margin: 0;
+}
+
 .finding-card__context,
 .gap-card__states {
   color: var(--color-text-secondary);
   font-size: 0.95rem;
+}
+
+.finding-card__evidence,
+.gap-card__evidence {
+  display: grid;
+  gap: 0.65rem;
+  padding-top: 0.35rem;
+  border-top: 1px dashed var(--color-border-subtle);
 }
 
 .finding-bills__label {
@@ -462,7 +706,7 @@
 
 .gap-card__header {
   display: grid;
-  gap: 0.65rem;
+  gap: 0.55rem;
 }
 
 .gap-card__status {
@@ -513,35 +757,67 @@
 }
 
 /* Brief tray */
+.brief-section .disclosure-section__panel {
+  padding-top: 0;
+}
+
 .brief-tray {
-  position: sticky;
-  top: 5.5rem;
   display: grid;
-  gap: 1rem;
+  gap: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  max-height: none;
+  overflow: visible;
+  position: static;
+}
+
+.brief-tray__header {
+  display: grid;
+  gap: 0.55rem;
   padding: 1.15rem;
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-lg);
-  background: var(--color-bg-surface);
-  box-shadow: var(--shadow-card);
-  max-height: calc(100vh - 6.5rem);
-  overflow: auto;
+}
+
+.brief-tray__title-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: center;
 }
 
 .brief-tray__header h2 {
-  font-size: 1.35rem;
-  margin-bottom: 0.35rem;
+  font-size: 1.25rem;
+  margin: 0;
 }
 
-.brief-tray__header > p {
-  color: var(--color-text-secondary);
+.brief-tray__compact {
+  margin: 0;
   font-size: 0.92rem;
+  color: var(--color-text-secondary);
 }
 
 .brief-tray__meta {
-  margin-top: 0.65rem;
+  margin: 0;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--color-bg-accent);
+}
+
+.brief-tray__hint {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.brief-tray__details {
+  display: grid;
+  gap: 1rem;
+  padding: 0 1.15rem 1.15rem;
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: 1rem;
 }
 
 .brief-tray__section h3 {
@@ -601,14 +877,8 @@
 }
 
 .brief-tray__actions {
-  position: sticky;
-  bottom: 0;
-  padding-top: 0.5rem;
-  background: linear-gradient(
-    to top,
-    var(--color-bg-surface) 70%,
-    transparent
-  );
+  position: static;
+  padding-top: 0.25rem;
 }
 
 .brief-tray__status {
@@ -636,28 +906,35 @@
   outline-offset: 2px;
 }
 
-@media (max-width: 960px) {
-  .nc-design__layout {
-    grid-template-columns: 1fr;
-  }
+/* Print document: hidden on screen */
+.print-brief {
+  display: none;
+}
 
-  .brief-tray {
-    position: static;
-    max-height: none;
-  }
-
+@media (max-width: 900px) {
   .nc-landscape-charts,
   .nc-momentum__split {
     grid-template-columns: 1fr;
   }
+
+  .bill-picker__label {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .bill-picker__title {
+    grid-column: 2 / -1;
+    white-space: normal;
+  }
+
+  .bill-picker__label .status-badge,
+  .bill-picker__in-brief {
+    grid-column: 2;
+  }
 }
 
 @media (max-width: 640px) {
-  .nc-featured-bills__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .nc-momentum__tabs {
+  .nc-momentum__tabs,
+  .substance-panel__mode {
     flex-direction: column;
   }
 
@@ -669,53 +946,161 @@
 
 @media (prefers-reduced-motion: reduce) {
   .nc-momentum__tab,
-  .btn {
+  .btn,
+  .disclosure-section__toggle {
     transition: none;
   }
 }
 
-/* Print: prioritize brief + key narrative */
+/*
+ * Print: hide the interactive page entirely.
+ * Only the dedicated print-brief document is rendered.
+ */
 @media print {
+  @page {
+    margin: 0.6in;
+    size: letter;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #111 !important;
+    font-size: 10.5pt;
+    line-height: 1.35;
+  }
+
   .site-header,
   .site-footer,
-  .nc-design__intro .btn-row,
-  .nc-momentum__map,
-  .nc-momentum__tabs,
-  .nc-landscape-charts,
-  .substance-card__actions,
-  .finding-card .btn-row,
-  .gap-card .btn-row,
-  .ref-bill-card__actions,
-  .brief-tray__actions {
+  .nc-design__screen,
+  .no-print {
     display: none !important;
   }
 
-  .nc-design__layout {
-    display: block;
+  .page-shell,
+  .nc-design,
+  main {
+    display: block !important;
+    min-height: 0 !important;
+    background: #fff !important;
   }
 
-  .brief-tray {
-    position: static;
-    max-height: none;
-    box-shadow: none;
-    border: 1px solid #000;
+  .print-brief {
+    display: block !important;
+    color: #111;
+  }
+
+  .print-brief__cover {
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1.5pt solid #152a45;
+  }
+
+  .print-brief__eyebrow {
+    margin: 0 0 0.25rem;
+    font-size: 8.5pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #524e48;
+  }
+
+  .print-brief h1 {
+    margin: 0 0 0.25rem;
+    font-size: 18pt;
+    line-height: 1.15;
+    color: #152a45;
+  }
+
+  .print-brief__subtitle {
+    margin: 0;
+    font-size: 11pt;
+    color: #524e48;
+  }
+
+  .print-brief__meta {
+    margin: 0.4rem 0 0;
+    font-size: 9pt;
+    color: #6f6a62;
+  }
+
+  .print-brief__section {
+    margin: 0 0 0.75rem;
+  }
+
+  .print-brief__section--break {
+    break-before: page;
     page-break-before: always;
   }
 
-  .nc-design__main {
-    gap: 1.25rem;
+  .print-brief h2 {
+    margin: 0 0 0.45rem;
+    font-size: 12.5pt;
+    color: #152a45;
+    border-bottom: 0.5pt solid #d0cac0;
+    padding-bottom: 0.2rem;
   }
 
-  .substance-card,
-  .finding-card,
-  .gap-card,
-  .ref-bill-card,
-  .nc-landscape-summary {
+  .print-brief h3 {
+    margin: 0.55rem 0 0.25rem;
+    font-size: 11pt;
+    color: #152a45;
+  }
+
+  .print-brief h4 {
+    margin: 0.4rem 0 0.2rem;
+    font-size: 10.5pt;
+  }
+
+  .print-brief p,
+  .print-brief li {
+    margin: 0 0 0.35rem;
+    font-size: 10pt;
+  }
+
+  .print-brief__counts,
+  .print-brief__note,
+  .print-brief__source {
+    font-size: 9pt;
+    color: #524e48;
+  }
+
+  .print-brief__note {
+    font-style: italic;
+  }
+
+  .print-brief__item,
+  .print-brief__bill,
+  .print-brief__substance {
     break-inside: avoid;
-    box-shadow: none;
+    page-break-inside: avoid;
+    margin: 0 0 0.55rem;
+    padding: 0.35rem 0 0.45rem;
+    border-bottom: 0.4pt solid #e8e4dc;
+  }
+
+  .print-brief__bills {
+    display: block;
+  }
+
+  .print-brief__bill-title {
+    font-weight: 600;
+  }
+
+  .print-brief__substance-block {
+    margin-top: 0.65rem;
+  }
+
+  .print-brief ul {
+    margin: 0.25rem 0 0.5rem;
+    padding-left: 1.1rem;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 
   a[href]::after {
-    content: none;
+    content: none !important;
   }
 }
